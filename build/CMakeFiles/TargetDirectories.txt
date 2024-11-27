@@ -1,0 +1,6 @@
+/data/home/dxnu/private/limiu/findex/build/CMakeFiles/edit_cache.dir
+/data/home/dxnu/private/limiu/findex/build/CMakeFiles/rebuild_cache.dir
+/data/home/dxnu/private/limiu/findex/build/src/CMakeFiles/findex.dir
+/data/home/dxnu/private/limiu/findex/build/src/CMakeFiles/edit_cache.dir
+/data/home/dxnu/private/limiu/findex/build/src/CMakeFiles/rebuild_cache.dir
+/data/home/dxnu/private/limiu/findex/build/src/CMakeFiles/findex_autogen.dir

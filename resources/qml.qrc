@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/AboutWindow.qml</file>
+        <file>qml/FindexMenuBar.qml</file>
+        <file>qml/FindexTitleBar.qml</file>
+        <file>qml/main.qml</file>
+    </qresource>
+    <qresource prefix="/translations">
+        <file alias="findex_zh_CN.qm">../build/src/findex_zh_CN.qm</file>
+    </qresource>
+    <qresource>
+        <file>fonts/fa-solid-900.ttf</file>
+        <file>fonts/MaterialIcons-Regular.ttf</file>
+        <file>fonts/MaterialSymbolsOutlined-Regular.ttf</file>
+        <file>fonts/MaterialSymbolsOutlined-Light.ttf</file>
+    </qresource>
+</RCC>

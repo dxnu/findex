@@ -1,0 +1,27 @@
+[
+{
+  "directory": "/data/home/dxnu/private/limiu/findex/build/src",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DBUS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/data/home/dxnu/private/limiu/findex/build/src/findex_autogen/include -I/data/home/dxnu/private/limiu/findex/src -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt5/QtDBus -isystem /usr/include/x86_64-linux-gnu/qt5/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt5/QtQml -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -g -fPIC -o CMakeFiles/findex.dir/findex_autogen/mocs_compilation.cpp.o -c /data/home/dxnu/private/limiu/findex/build/src/findex_autogen/mocs_compilation.cpp",
+  "file": "/data/home/dxnu/private/limiu/findex/build/src/findex_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "/data/home/dxnu/private/limiu/findex/build/src",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DBUS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/data/home/dxnu/private/limiu/findex/build/src/findex_autogen/include -I/data/home/dxnu/private/limiu/findex/src -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt5/QtDBus -isystem /usr/include/x86_64-linux-gnu/qt5/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt5/QtQml -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -g -fPIC -o CMakeFiles/findex.dir/controller/SearchController.cpp.o -c /data/home/dxnu/private/limiu/findex/src/controller/SearchController.cpp",
+  "file": "/data/home/dxnu/private/limiu/findex/src/controller/SearchController.cpp"
+},
+{
+  "directory": "/data/home/dxnu/private/limiu/findex/build/src",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DBUS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/data/home/dxnu/private/limiu/findex/build/src/findex_autogen/include -I/data/home/dxnu/private/limiu/findex/src -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt5/QtDBus -isystem /usr/include/x86_64-linux-gnu/qt5/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt5/QtQml -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -g -fPIC -o CMakeFiles/findex.dir/main.cpp.o -c /data/home/dxnu/private/limiu/findex/src/main.cpp",
+  "file": "/data/home/dxnu/private/limiu/findex/src/main.cpp"
+},
+{
+  "directory": "/data/home/dxnu/private/limiu/findex/build/src",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DBUS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/data/home/dxnu/private/limiu/findex/build/src/findex_autogen/include -I/data/home/dxnu/private/limiu/findex/src -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt5/QtDBus -isystem /usr/include/x86_64-linux-gnu/qt5/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt5/QtQml -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -g -fPIC -o CMakeFiles/findex.dir/model/SearchModel.cpp.o -c /data/home/dxnu/private/limiu/findex/src/model/SearchModel.cpp",
+  "file": "/data/home/dxnu/private/limiu/findex/src/model/SearchModel.cpp"
+},
+{
+  "directory": "/data/home/dxnu/private/limiu/findex/build/src",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DBUS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/data/home/dxnu/private/limiu/findex/build/src/findex_autogen/include -I/data/home/dxnu/private/limiu/findex/src -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt5/QtDBus -isystem /usr/include/x86_64-linux-gnu/qt5/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt5/QtQml -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -g -fPIC -o CMakeFiles/findex.dir/findex_autogen/7BV4YJK25R/qrc_qml.cpp.o -c /data/home/dxnu/private/limiu/findex/build/src/findex_autogen/7BV4YJK25R/qrc_qml.cpp",
+  "file": "/data/home/dxnu/private/limiu/findex/build/src/findex_autogen/7BV4YJK25R/qrc_qml.cpp"
+}
+]

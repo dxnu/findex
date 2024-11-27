@@ -1,0 +1,5 @@
+# Hashes of file build rules.
+df5f283bb581674ca3e5d35aac90b9ed ../resources/translations/findex_zh_CN.ts
+daaab1c68d07bf2cdaa12b9c9522bab4 src/CMakeFiles/findex_autogen
+94827fb719bcef46a2acd11b84144089 src/findex_autogen/7BV4YJK25R/qrc_qml.cpp
+49b16935c0559166499ea0fd7c690c1c src/findex_zh_CN.qm
