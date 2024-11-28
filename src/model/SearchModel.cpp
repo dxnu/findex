@@ -1,33 +1,45 @@
 #include "SearchModel.h"
 
-#include <QtDBus>
+#include <QDebug>
 
 SearchModel::SearchModel(QObject* parent)
-    : QAbstractListModel(parent) {}
+    : QAbstractListModel(parent)
+{
+    qDebug() << "SearchModel created:" << this;
+    if (QDBusConnection::systemBus().isConnected()) {
+        iface_ = std::make_unique<QDBusInterface>("my.test.SAnything", "/my/test/OAnything", "my.test.IAnything", QDBusConnection::systemBus());
+    }
+}
+
+SearchModel::~SearchModel()
+{
+    qDebug() << "SearchModel destroyed:" << this;
+}
 
 void SearchModel::search(const QString& path, const QString& keywords, int offset, int maxCount)
 {
-    // qDebug() << path << "," << keywords << "," << offset << "," << max_count;
-    if (!QDBusConnection::systemBus().isConnected()) {
-        qCritical() << "Cannot connect to the D-Bus session bus.\n";
+    auto trimmedKeywords = keywords.trimmed();
+    if (trimmedKeywords.isEmpty()) {
         return;
     }
 
-    QDBusInterface iface("my.test.SAnything", "/my/test/OAnything", "my.test.IAnything", QDBusConnection::systemBus());
-    if (iface.isValid()) {
-        QDBusReply<QStringList> reply = iface.call("search", path, keywords, offset, maxCount);
-        if (reply.isValid()) {
-            for (const auto& filePath : reply.value()) {
+    if (iface_->isValid()) {
+        QDBusReply<QStringList> results = iface_->call("search", path, trimmedKeywords, offset, maxCount);
+        if (results.isValid()) {
+            for (const auto& filePath : results.value()) {
                 QFileInfo fileInfo(filePath);
                 if (fileInfo.exists()) {
-                    addFileRecord({
-                        .file_name = fileInfo.fileName(),
-                        .full_path = fileInfo.path()
-                    });
+                    FileType type;
+                    if (fileInfo.isDir()) type = FileType::Directory;
+                    else if (fileInfo.isFile()) type = FileType::File;
+                    else if (fileInfo.isSymLink()) type = FileType::Symlink;
+                    else if (fileInfo.isExecutable()) type = FileType::Executable;
+                    else type = FileType::Unknown;
+                    addFileRecord({ fileInfo.fileName(), fileInfo.path(), type });
                 }
             }
         } else {
-            qCritical() << "Call to search failed:" << qPrintable(reply.error().message());
+            qCritical() << "Call to search failed:" << qPrintable(results.error().message());
         }
     }
 }
@@ -66,9 +78,9 @@ QVariant SearchModel::data(const QModelIndex& index, int role) const
 
     const FileRecord& record = records_[index.row()];
     if (role == FileNameRole)
-        return record.file_name;
+        return record.fileName;
     else if (role == FullPathRole)
-        return record.full_path;
+        return record.fullPath;
 
     return QVariant();
 }
@@ -76,7 +88,7 @@ QVariant SearchModel::data(const QModelIndex& index, int role) const
 QHash<int, QByteArray> SearchModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
-    roles[FileNameRole] = "file_name";
-    roles[FullPathRole] = "full_path";
+    roles[FileNameRole] = "fileName";
+    roles[FullPathRole] = "fullPath";
     return roles;
 }

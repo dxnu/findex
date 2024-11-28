@@ -1,0 +1,34 @@
+{
+	"BUILD_DIR" : "/data/home/dxnu/private/limiu/findex/build/src/findex_autogen",
+	"CMAKE_BINARY_DIR" : "/data/home/dxnu/private/limiu/findex/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/data/home/dxnu/private/limiu/findex/build/src",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/data/home/dxnu/private/limiu/findex/src",
+	"CMAKE_SOURCE_DIR" : "/data/home/dxnu/private/limiu/findex",
+	"INCLUDE_DIR" : "/data/home/dxnu/private/limiu/findex/build/src/findex_autogen/include",
+	"INPUTS" : 
+	[
+		"/data/home/dxnu/private/limiu/findex/resources/qml/FindexMenuBar.qml",
+		"/data/home/dxnu/private/limiu/findex/resources/qml/AboutWindow.qml",
+		"/data/home/dxnu/private/limiu/findex/resources/qml/FindexGridView.qml",
+		"/data/home/dxnu/private/limiu/findex/resources/qml/FindexListView.qml",
+		"/data/home/dxnu/private/limiu/findex/resources/qml/FindexTitleBar.qml",
+		"/data/home/dxnu/private/limiu/findex/resources/qml/main.qml",
+		"/data/home/dxnu/private/limiu/findex/resources/fonts/MaterialIcons-Regular.ttf",
+		"/data/home/dxnu/private/limiu/findex/resources/fonts/MaterialSymbolsOutlined_Filled-Regular.ttf",
+		"/data/home/dxnu/private/limiu/findex/resources/fonts/MaterialSymbolsOutlined-Regular.ttf",
+		"/data/home/dxnu/private/limiu/findex/resources/fonts/fa-solid-900.ttf",
+		"/data/home/dxnu/private/limiu/findex/resources/fonts/MaterialSymbolsOutlined-Light.ttf",
+		"/data/home/dxnu/private/limiu/findex/resources/js/utils.js",
+		"/data/home/dxnu/private/limiu/findex/build/src/findex_zh_CN.qm"
+	],
+	"LOCK_FILE" : "/data/home/dxnu/private/limiu/findex/build/src/CMakeFiles/findex_autogen.dir/AutoRcc_qml_7BV4YJK25R_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "qml" ],
+	"OUTPUT_CHECKSUM" : "7BV4YJK25R",
+	"OUTPUT_NAME" : "qrc_qml.cpp",
+	"RCC_EXECUTABLE" : "/usr/lib/qt5/bin/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/data/home/dxnu/private/limiu/findex/build/src/CMakeFiles/findex_autogen.dir/AutoRcc_qml_7BV4YJK25R_Used.txt",
+	"SOURCE" : "/data/home/dxnu/private/limiu/findex/resources/qml.qrc",
+	"VERBOSITY" : 0
+}

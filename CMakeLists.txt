@@ -13,4 +13,7 @@ set(RC_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/resources/qml.qrc
 )
 
+add_compile_options(-fsanitize=address -g)
+add_link_options(-fsanitize=address)
+
 add_subdirectory(src)

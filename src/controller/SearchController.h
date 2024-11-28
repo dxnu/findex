@@ -10,6 +10,7 @@ class SearchController : public QObject
     Q_OBJECT
 public:
     explicit SearchController(QObject* parent = nullptr);
+    ~SearchController();
 
     Q_INVOKABLE SearchModel* model() const;
 

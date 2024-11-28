@@ -86,10 +86,12 @@ Rectangle {
                 onTextChanged: {
                     if (text.length > 0) {
                         searchController.clear()
-                        searchController.search("", searchTextField.text, 0, 300)
+                        searchController.search("", searchTextField.text, 0, 40)
                         // var result = searchController.search("", searchTextField.text, 0, 10)
                         // searchCompleted(result)
-                    }
+                    } /*else { // 
+                        searchController.clear()
+                    }*/
                 }
             }
         }

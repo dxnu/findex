@@ -1,13 +1,12 @@
 #ifndef SEARCH_MODEL_H_
 #define SEARCH_MODEL_H_
 
+#include <memory>
+
 #include <QAbstractListModel>
 #include <QStringList>
+#include <QtDBus>
 
-struct FileRecord {
-    QString file_name;
-    QString full_path;
-};
 
 class SearchModel : public QAbstractListModel {
     Q_OBJECT
@@ -16,8 +15,23 @@ public:
         FileNameRole = Qt::UserRole + 1,
         FullPathRole
     };
+    enum FileType {
+        Unknown,
+        File,
+        Directory,
+        Symlink,
+        Executable
+    };
+    Q_ENUM(FileType)
+
+    struct FileRecord {
+        QString fileName;
+        QString fullPath;
+        FileType fileType;
+    };
 
     explicit SearchModel(QObject* parent = nullptr);
+    ~SearchModel();
 
     void search(const QString& path, const QString& keywords, int offset, int maxCount);
 
@@ -35,6 +49,7 @@ protected:
 
 private:
     QList<FileRecord> records_;
+    std::unique_ptr<QDBusInterface> iface_;
 };
 
 #endif // SEARCH_MODEL_H_

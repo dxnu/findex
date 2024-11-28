@@ -1,9 +1,17 @@
 #include "SearchController.h"
 
+#include <QDebug>
+
 SearchController::SearchController(QObject* parent)
     : QObject(parent)
 {
-    searchModel_ = new SearchModel();
+    qDebug() << "SearchModel created:" << this;
+    searchModel_ = new SearchModel(this);
+}
+
+SearchController::~SearchController()
+{
+    qDebug() << "SearchController destroyed:" << this;
 }
 
 Q_INVOKABLE SearchModel *SearchController::model() const
