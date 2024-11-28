@@ -13,7 +13,8 @@ public:
 
     Q_INVOKABLE SearchModel* model() const;
 
-    Q_INVOKABLE QStringList search(const QString& path, const QString& keywords, int offset, int max_count);
+    Q_INVOKABLE void search(const QString& path, const QString& keywords, int offset, int max_count);
+    Q_INVOKABLE void clear();
 
 private:
     SearchModel* searchModel_;

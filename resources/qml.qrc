@@ -5,6 +5,9 @@
         <file>qml/FindexTitleBar.qml</file>
         <file>qml/main.qml</file>
     </qresource>
+    <qresource prefix="/">
+        <file>js/utils.js</file>
+    </qresource>
     <qresource prefix="/translations">
         <file alias="findex_zh_CN.qm">../build/src/findex_zh_CN.qm</file>
     </qresource>
@@ -13,5 +16,6 @@
         <file>fonts/MaterialIcons-Regular.ttf</file>
         <file>fonts/MaterialSymbolsOutlined-Regular.ttf</file>
         <file>fonts/MaterialSymbolsOutlined-Light.ttf</file>
+        <file>fonts/MaterialSymbolsOutlined_Filled-Regular.ttf</file>
     </qresource>
 </RCC>

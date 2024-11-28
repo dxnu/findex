@@ -11,7 +11,12 @@ Q_INVOKABLE SearchModel *SearchController::model() const
     return searchModel_;
 }
 
-Q_INVOKABLE QStringList SearchController::search(const QString &path, const QString &keywords, int offset, int max_count)
+Q_INVOKABLE void SearchController::search(const QString &path, const QString &keywords, int offset, int max_count)
 {
-    return searchModel_->search(path, keywords, offset, max_count);
+    searchModel_->search(path, keywords, offset, max_count);
+}
+
+Q_INVOKABLE void SearchController::clear()
+{
+    searchModel_->clear();
 }

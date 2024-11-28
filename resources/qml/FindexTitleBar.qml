@@ -9,7 +9,7 @@ Rectangle {
     height: parent.height
     // color: "red"
 
-    signal searchCompleted(var result)
+    // signal searchCompleted(var result)
 
     RowLayout {
         id: searchRowLayout
@@ -85,8 +85,10 @@ Rectangle {
 
                 onTextChanged: {
                     if (text.length > 0) {
-                        var result = searchController.search("", searchTextField.text, 0, 10)
-                        searchCompleted(result)
+                        searchController.clear()
+                        searchController.search("", searchTextField.text, 0, 300)
+                        // var result = searchController.search("", searchTextField.text, 0, 10)
+                        // searchCompleted(result)
                     }
                 }
             }
@@ -108,6 +110,7 @@ Rectangle {
                     searchButton.text = "\uf02f"
                     if (!searchRect.visible) {
                         searchRect.visible = true
+                        searchTextField.forceActiveFocus()
                     }
                 } else {
                     searchButton.text = "\ue8b6"
@@ -134,6 +137,7 @@ Rectangle {
                 color: gridViewButton.hovered ? "#d6d6d6" : "#ffffff"
                 radius: 10
             }
+            onClicked: mainWindow.currentView = "grid"
         }
 
         Button {
@@ -147,6 +151,7 @@ Rectangle {
                 color: listViewButton.hovered ? "#d6d6d6" : "#ffffff"
                 radius: 10
             }
+            onClicked: mainWindow.currentView = "list"
         }
 
         Button {
@@ -160,6 +165,7 @@ Rectangle {
                 color: treeViewButton.hovered ? "#d6d6d6" : "#ffffff"
                 radius: 10
             }
+            onClicked: mainWindow.currentView = "tree"
         }
     }
 
