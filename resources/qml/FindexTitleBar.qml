@@ -139,7 +139,10 @@ Rectangle {
                 color: gridViewButton.hovered ? "#d6d6d6" : "#ffffff"
                 radius: 10
             }
-            onClicked: mainWindow.currentView = "grid"
+            onClicked: {
+                if (mainWindow.currentView !== "grid")
+                    mainWindow.currentView = "grid"
+            }
         }
 
         Button {
@@ -212,7 +215,7 @@ Rectangle {
             id: maximumButton
             font.family: materialIcons.name
             font.pixelSize: 20
-            text: mainWindow.visibility === Window.Maximized ? "\ue5d1" : "\ue3c0"
+            text: mainWindow.visibility === Window.Maximized ? "\ue65b" : "\ue3c0" // f743/e3e0
             background: Rectangle {
                 implicitWidth: 50
                 implicitHeight: titleRect.height

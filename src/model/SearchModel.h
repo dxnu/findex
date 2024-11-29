@@ -36,6 +36,8 @@ public:
 
     void search(const QString& path, const QString& keywords, int offset, int maxCount);
 
+    void indexFilesInDirectory(const QString& directoryPath) const;
+
     void addFileRecord(FileRecord record);
     void deleteFileRecord(int index);
 

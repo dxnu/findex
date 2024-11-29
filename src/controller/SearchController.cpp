@@ -28,3 +28,8 @@ Q_INVOKABLE void SearchController::clear()
 {
     searchModel_->clear();
 }
+
+Q_INVOKABLE void SearchController::indexFilesInDirectory(const QString& directoryPath) const
+{
+    searchModel_->indexFilesInDirectory(directoryPath);
+}

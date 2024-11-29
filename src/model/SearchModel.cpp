@@ -44,6 +44,12 @@ void SearchModel::search(const QString& path, const QString& keywords, int offse
     }
 }
 
+void SearchModel::indexFilesInDirectory(const QString& directoryPath) const
+{
+    if (iface_->isValid())
+        iface_->call("index_files_in_directory", directoryPath);
+}
+
 void SearchModel::addFileRecord(FileRecord record)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());

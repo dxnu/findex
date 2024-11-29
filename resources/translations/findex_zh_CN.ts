@@ -35,6 +35,14 @@
     </message>
 </context>
 <context>
+    <name>FindexSettingMenu</name>
+    <message>
+        <location filename="../qml/FindexSettingMenu.qml" line="81"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <location filename="../qml/main.qml" line="12"/>
