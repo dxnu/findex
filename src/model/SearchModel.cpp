@@ -81,6 +81,8 @@ QVariant SearchModel::data(const QModelIndex& index, int role) const
         return record.fileName;
     else if (role == FullPathRole)
         return record.fullPath;
+    else if (role == FileTypeRole)
+        return record.fileType;
 
     return QVariant();
 }
@@ -90,5 +92,6 @@ QHash<int, QByteArray> SearchModel::roleNames() const
     QHash<int, QByteArray> roles;
     roles[FileNameRole] = "fileName";
     roles[FullPathRole] = "fullPath";
+    roles[FileTypeRole] = "fileType";
     return roles;
 }

@@ -2,14 +2,16 @@ import QtQuick 2.0
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.0
 import com.search.model 1.0
-import "qrc:js/utils.js" as Utils
+import "qrc:findex/js/file-style.js" as FileStyle
+import "qrc:findex/js/utils.js" as Utils
 
 Component {
     GridView {
         id: fileGridView
         y: titleBar.height
         width: mainWindow.width
-        height: mainWindow.height
+        height: mainWindow.height - titleBar.height - mainWindow.footer.height
+        clip: true
         model: searchController.model()
         cellWidth: 100
         cellHeight: 120
@@ -47,8 +49,8 @@ Component {
                         anchors.centerIn: parent
                         font.family: materialFilled.name
                         font.pixelSize: 48
-                        text: model.fileType === SearchModel.Directory ? "\ue2c7" : "\ue873"
-                        color: "#5985E1"
+                        text: FileStyle.getIcon(model.fileType)
+                        color: FileStyle.getColor(model.fileType)
                     }
 
                     MouseArea {
@@ -129,6 +131,25 @@ Component {
                 //     }
                 // }
             }
+        }
+        
+        ScrollBar.vertical: ScrollBar {
+            // contentItem: Rectangle { // 似乎无效
+            //     implicitHeight: 6
+            //     color: "red"
+            // }
+            // style: ScrollBarStyle { // 高版本方式
+            //     handle: Rectangle {
+            //         implicitWidth: 10
+            //         implicitHeight: 50
+            //         radius: 5
+            //         color: "blue" // 滚动条滑块的颜色
+            //     }
+            //     background: Rectangle {
+            //         implicitWidth: 10
+            //         color: "#e0e0e0" // 滚动条轨道的颜色
+            //     }
+            // }
         }
     }
 }

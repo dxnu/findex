@@ -13,7 +13,8 @@ class SearchModel : public QAbstractListModel {
 public:
     enum FileRecordRoles {
         FileNameRole = Qt::UserRole + 1,
-        FullPathRole
+        FullPathRole,
+        FileTypeRole
     };
     enum FileType {
         Unknown,

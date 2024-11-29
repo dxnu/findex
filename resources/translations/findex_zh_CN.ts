@@ -35,14 +35,6 @@
     </message>
 </context>
 <context>
-    <name>FindexTitleBar</name>
-    <message>
-        <location filename="../qml/FindexTitleBar.qml" line="337"/>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>main</name>
     <message>
         <location filename="../qml/main.qml" line="12"/>

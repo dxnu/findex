@@ -3,12 +3,13 @@
         <file>qml/AboutWindow.qml</file>
         <file>qml/FindexGridView.qml</file>
         <file>qml/FindexListView.qml</file>
-        <file>qml/FindexMenuBar.qml</file>
+        <file>qml/FindexSettingMenu.qml</file>
         <file>qml/FindexTitleBar.qml</file>
         <file>qml/main.qml</file>
     </qresource>
-    <qresource prefix="/">
+    <qresource prefix="/findex">
         <file>js/utils.js</file>
+        <file>js/file-style.js</file>
     </qresource>
     <qresource prefix="/translations">
         <file alias="findex_zh_CN.qm">../build/src/findex_zh_CN.qm</file>
@@ -19,5 +20,8 @@
         <file>fonts/MaterialSymbolsOutlined-Regular.ttf</file>
         <file>fonts/MaterialSymbolsOutlined-Light.ttf</file>
         <file>fonts/MaterialSymbolsOutlined_Filled-Regular.ttf</file>
+    </qresource>
+    <qresource>
+        <!-- <file>images/scrollbar.png</file> -->
     </qresource>
 </RCC>
