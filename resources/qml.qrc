@@ -1,8 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/AboutWindow.qml</file>
+        <file>qml/FindexFooter.qml</file>
         <file>qml/FindexGridView.qml</file>
         <file>qml/FindexListView.qml</file>
+        <file>qml/FindexLogView.qml</file>
         <file>qml/FindexSettingMenu.qml</file>
         <file>qml/FindexTitleBar.qml</file>
         <file>qml/main.qml</file>
@@ -10,6 +12,7 @@
     <qresource prefix="/findex">
         <file>js/utils.js</file>
         <file>js/file-style.js</file>
+        <file>js/view.js</file>
     </qresource>
     <qresource prefix="/translations">
         <file alias="findex_zh_CN.qm">../build/src/findex_zh_CN.qm</file>

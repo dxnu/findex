@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.0
-
+import "qrc:findex/js/view.js" as View
 
 ApplicationWindow {
     id: mainWindow
@@ -38,9 +38,7 @@ ApplicationWindow {
         Layout.fillWidth: true
         Layout.fillHeight: true
 
-        sourceComponent: currentView === "grid" ? gridView :
-                         currentView === "list" ? listView :
-                         treeView
+        sourceComponent: View.loadView(currentView)
     }
 
     FindexGridView {
@@ -49,6 +47,10 @@ ApplicationWindow {
 
     FindexListView {
         id: listView
+    }
+
+    FindexLogView {
+        id: logView
     }
 
     // Component {
@@ -149,14 +151,7 @@ ApplicationWindow {
     //     }
     // }
 
-    footer: Rectangle {
-        height: 40
-        width: parent.width
-        color: "lightgray"
-        Text {
-            font.family: materialIcons.name
-            anchors.centerIn: parent
-            text: "\ue5d2"
-        }
+    footer: FindexFooter {
+        id: findexFooter
     }
 }

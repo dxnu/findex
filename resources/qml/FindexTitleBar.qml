@@ -86,7 +86,9 @@ Rectangle {
                 onTextChanged: {
                     if (text.length > 0) {
                         searchController.clear()
-                        searchController.search("", searchTextField.text, 0, 400)
+                        // searchController.search("", searchTextField.text, 0, 400)
+                        searchController.search(searchTextField.text)
+                        findexFooter.query_stats = searchController.size() + " Results"
                         // var result = searchController.search("", searchTextField.text, 0, 10)
                         // searchCompleted(result)
                     } /*else { // 
@@ -171,6 +173,25 @@ Rectangle {
                 radius: 10
             }
             onClicked: mainWindow.currentView = "tree"
+        }
+
+        Button {
+            id: logButton
+            font.family: materialIcons.name
+            font.pixelSize: 20
+            text: "\ue0a8" // e104
+            background: Rectangle {
+                implicitWidth: titleRect.height - 20
+                implicitHeight: titleRect.height - 20
+                color: logButton.hovered ? "#d6d6d6" : "#ffffff"
+                radius: 10
+            }
+            onClicked: {
+                logFileMonitor.setFilePath("/data/home/dxnu/.cache/findex/findex.log")
+                mainWindow.currentView = "log"
+            }
+            ToolTip.visible: hovered
+            ToolTip.text: qsTr("Log View")
         }
     }
 

@@ -80,10 +80,14 @@ Menu {
     MenuItem {
         text: qsTr("About")
         onTriggered: {
-            // var factory = Qt.createComponent("AboutWindow.qml");
-            // var aboutWindow = factory.createObject(mainWindow);
-            // aboutWindow.visible = true
-            // aboutWindow.show()
+            var factory = Qt.createComponent("AboutWindow.qml")
+            if (factory.status === Component.Error) {
+                console.log("Component status:", factory.status)
+                console.log("Error loading component:", factory.errorString())
+            } else {
+                var aboutWindow = factory.createObject()
+                aboutWindow.show()
+            }
         }
     }
     onOpened: console.log("Menu opened")

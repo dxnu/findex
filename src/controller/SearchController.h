@@ -1,5 +1,5 @@
-#ifndef SEARCH_CONTROLLER_H_
-#define SEARCH_CONTROLLER_H_
+#ifndef SEARCH_CONTROLLER_H
+#define SEARCH_CONTROLLER_H
 
 #include <QObject>
 
@@ -15,6 +15,9 @@ public:
     Q_INVOKABLE SearchModel* model() const;
 
     Q_INVOKABLE void search(const QString& path, const QString& keywords, int offset, int maxCount);
+    Q_INVOKABLE void search(const QString& keywords);
+
+    Q_INVOKABLE int size() const;
     
     Q_INVOKABLE void clear();
 
@@ -24,4 +27,4 @@ private:
     SearchModel* searchModel_;
 };
 
-#endif // SEARCH_CONTROLLER_H_
+#endif // SEARCH_CONTROLLER_H

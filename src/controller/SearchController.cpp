@@ -24,6 +24,16 @@ Q_INVOKABLE void SearchController::search(const QString &path, const QString &ke
     searchModel_->search(path, keywords, offset, max_count);
 }
 
+Q_INVOKABLE void SearchController::search(const QString &keywords)
+{
+    searchModel_->search(keywords);
+}
+
+Q_INVOKABLE int SearchController::size() const
+{
+    return searchModel_->rowCount();
+}
+
 Q_INVOKABLE void SearchController::clear()
 {
     searchModel_->clear();

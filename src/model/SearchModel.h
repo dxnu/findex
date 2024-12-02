@@ -1,5 +1,5 @@
-#ifndef SEARCH_MODEL_H_
-#define SEARCH_MODEL_H_
+#ifndef SEARCH_MODEL_H
+#define SEARCH_MODEL_H
 
 #include <memory>
 
@@ -35,6 +35,7 @@ public:
     ~SearchModel();
 
     void search(const QString& path, const QString& keywords, int offset, int maxCount);
+    void search(const QString& keywords);
 
     void indexFilesInDirectory(const QString& directoryPath) const;
 
@@ -51,8 +52,11 @@ protected:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
+    void handleSearchResults(const QDBusReply<QStringList>& results);
+
+private:
     QList<FileRecord> records_;
     std::unique_ptr<QDBusInterface> iface_;
 };
 
-#endif // SEARCH_MODEL_H_
+#endif // SEARCH_MODEL_H

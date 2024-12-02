@@ -45,6 +45,13 @@ Component {
                         : (fileGridViewMouseArea.containsMouse ? "lightgreen" : "#00000000")
                     radius: 10
 
+                    ToolTip {
+                        text: model.fullPath
+                        visible: fileGridViewMouseArea.containsMouse
+                        x: parent.x
+                        y: parent.y + parent.height + 5
+                    }
+                    
                     Text {
                         anchors.centerIn: parent
                         font.family: materialFilled.name

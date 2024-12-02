@@ -43,6 +43,14 @@
     </message>
 </context>
 <context>
+    <name>FindexTitleBar</name>
+    <message>
+        <location filename="../qml/FindexTitleBar.qml" line="193"/>
+        <source>Log View</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <location filename="../qml/main.qml" line="12"/>

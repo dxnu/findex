@@ -25,22 +25,20 @@ void SearchModel::search(const QString& path, const QString& keywords, int offse
 
     if (iface_->isValid()) {
         QDBusReply<QStringList> results = iface_->call("search", path, trimmedKeywords, offset, maxCount);
-        if (results.isValid()) {
-            for (const auto& filePath : results.value()) {
-                QFileInfo fileInfo(filePath);
-                if (fileInfo.exists()) {
-                    FileType type;
-                    if (fileInfo.isDir()) type = FileType::Directory;
-                    else if (fileInfo.isFile()) type = FileType::File;
-                    else if (fileInfo.isSymLink()) type = FileType::Symlink;
-                    else if (fileInfo.isExecutable()) type = FileType::Executable;
-                    else type = FileType::Unknown;
-                    addFileRecord({ fileInfo.fileName(), fileInfo.path(), type });
-                }
-            }
-        } else {
-            qCritical() << "Call to search failed:" << qPrintable(results.error().message());
-        }
+        handleSearchResults(results);
+    }
+}
+
+void SearchModel::search(const QString &keywords)
+{
+    auto trimmedKeywords = keywords.trimmed();
+    if (trimmedKeywords.isEmpty()) {
+        return;
+    }
+
+    if (iface_->isValid()) {
+        QDBusReply<QStringList> results = iface_->call("search", trimmedKeywords);
+        handleSearchResults(results);
     }
 }
 
@@ -100,4 +98,24 @@ QHash<int, QByteArray> SearchModel::roleNames() const
     roles[FullPathRole] = "fullPath";
     roles[FileTypeRole] = "fileType";
     return roles;
+}
+
+void SearchModel::handleSearchResults(const QDBusReply<QStringList>& results)
+{
+    if (results.isValid()) {
+        for (const auto& filePath : results.value()) {
+            QFileInfo fileInfo(filePath);
+            if (fileInfo.exists()) {
+                FileType type;
+                if (fileInfo.isDir()) type = FileType::Directory;
+                else if (fileInfo.isFile()) type = FileType::File;
+                else if (fileInfo.isSymLink()) type = FileType::Symlink;
+                else if (fileInfo.isExecutable()) type = FileType::Executable;
+                else type = FileType::Unknown;
+                addFileRecord({ fileInfo.fileName(), fileInfo.path(), type });
+            }
+        }
+    } else {
+        qCritical() << "Call to search failed:" << qPrintable(results.error().message());
+    }
 }
