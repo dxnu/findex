@@ -8,7 +8,7 @@ Component {
         y: titleBar.height
         
         width: mainWindow.width
-        height: mainWindow.height
+        height: mainWindow.height - titleBar.height - mainWindow.footer.height
         // keyNavigationWraps: true
         clip: true
         focus: true
@@ -19,7 +19,7 @@ Component {
             id: control
             implicitWidth: parent.width
             implicitHeight: 40
-            text: model.file_name
+            text: model.fileName
 
             contentItem: Text {
                 text: control.text
@@ -46,6 +46,7 @@ Component {
                 fileListView.currentIndex = model.index
             }
         }
+        ScrollBar.vertical: ScrollBar {}
     }
 
     // ScrollArea {

@@ -45,7 +45,7 @@
 <context>
     <name>FindexTitleBar</name>
     <message>
-        <location filename="../qml/FindexTitleBar.qml" line="193"/>
+        <location filename="../qml/FindexTitleBar.qml" line="197"/>
         <source>Log View</source>
         <translation type="unfinished"></translation>
     </message>
@@ -53,7 +53,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="12"/>
+        <location filename="../qml/main.qml" line="14"/>
         <source>findex</source>
         <translation type="unfinished"></translation>
     </message>

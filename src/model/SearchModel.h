@@ -52,7 +52,11 @@ protected:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    void handleSearchResults(const QDBusReply<QStringList>& results);
+    void handleSearchResults(const QStringList& results);
+
+signals:
+    void searchCompleted(int searchCount);
+    void searchResultsReady(const QStringList& results);
 
 private:
     QList<FileRecord> records_;

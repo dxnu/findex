@@ -13,13 +13,16 @@ Rectangle {
 
     RowLayout {
         id: searchRowLayout
+        anchors.left: parent.left
         anchors.right: viewRowLayout.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.rightMargin: 20
+        anchors.leftMargin: 20
         spacing: 20
 
         Rectangle {
             id: searchRect
+            Layout.alignment: Qt.AlignRight
             implicitWidth: 0.8 * (titleRect.width - viewRowLayout.width - basicRowLayout.width)
             implicitHeight: titleRect.height - 20
             radius: 20
@@ -85,11 +88,10 @@ Rectangle {
 
                 onTextChanged: {
                     if (text.length > 0) {
+                        findexFooter.query_stats = "Searching...";
                         searchController.clear()
-                        // searchController.search("", searchTextField.text, 0, 400)
                         searchController.search(searchTextField.text)
-                        findexFooter.query_stats = searchController.size() + " Results"
-                        // var result = searchController.search("", searchTextField.text, 0, 10)
+                        // searchController.search("", searchTextField.text, 0, 10000)
                         // searchCompleted(result)
                     } /*else { // 
                         searchController.clear()
@@ -100,6 +102,7 @@ Rectangle {
 
         Button {
             id: searchButton
+            Layout.alignment: Qt.AlignRight
             font.family: materialIcons.name
             font.pixelSize: 20
             text: "\ue8b6"

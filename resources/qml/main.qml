@@ -8,6 +8,8 @@ ApplicationWindow {
     id: mainWindow
     width: 1400
     height: 800
+    minimumWidth: 1000
+    minimumHeight: 600
     visible: true
     title: qsTr("findex")
     // flags: Qt.FramelessWindowHint
@@ -153,5 +155,12 @@ ApplicationWindow {
 
     footer: FindexFooter {
         id: findexFooter
+    }
+
+    Connections {
+        target: searchController.model()
+        onSearchCompleted: {
+            findexFooter.query_stats = searchCount + " Results"
+        }
     }
 }

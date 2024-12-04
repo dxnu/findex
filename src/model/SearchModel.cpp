@@ -1,5 +1,6 @@
 #include "SearchModel.h"
 
+#include <QtConcurrent/QtConcurrent>
 #include <QDebug>
 
 SearchModel::SearchModel(QObject* parent)
@@ -9,6 +10,8 @@ SearchModel::SearchModel(QObject* parent)
     if (QDBusConnection::systemBus().isConnected()) {
         iface_ = std::make_unique<QDBusInterface>("my.test.SAnything", "/my/test/OAnything", "my.test.IAnything", QDBusConnection::systemBus());
     }
+
+    connect(this, &SearchModel::searchResultsReady, this, &SearchModel::handleSearchResults);
 }
 
 SearchModel::~SearchModel()
@@ -24,8 +27,14 @@ void SearchModel::search(const QString& path, const QString& keywords, int offse
     }
 
     if (iface_->isValid()) {
-        QDBusReply<QStringList> results = iface_->call("search", path, trimmedKeywords, offset, maxCount);
-        handleSearchResults(results);
+        QtConcurrent::run([=] {
+            QDBusReply<QStringList> results = iface_->call("search", path, trimmedKeywords, offset, maxCount);
+            if (results.isValid()) {
+                emit searchResultsReady(results.value());
+            } else {
+                qCritical() << "Call to search failed:" << qPrintable(results.error().message());
+            }
+        });
     }
 }
 
@@ -37,8 +46,14 @@ void SearchModel::search(const QString &keywords)
     }
 
     if (iface_->isValid()) {
-        QDBusReply<QStringList> results = iface_->call("search", trimmedKeywords);
-        handleSearchResults(results);
+        QtConcurrent::run([this, trimmedKeywords = std::move(trimmedKeywords)] {
+            QDBusReply<QStringList> results = iface_->call("search", trimmedKeywords);
+            if (results.isValid()) {
+                emit searchResultsReady(results.value());
+            } else {
+                qCritical() << "Call to search failed:" << qPrintable(results.error().message());
+            }
+        });
     }
 }
 
@@ -100,22 +115,20 @@ QHash<int, QByteArray> SearchModel::roleNames() const
     return roles;
 }
 
-void SearchModel::handleSearchResults(const QDBusReply<QStringList>& results)
+void SearchModel::handleSearchResults(const QStringList& results)
 {
-    if (results.isValid()) {
-        for (const auto& filePath : results.value()) {
-            QFileInfo fileInfo(filePath);
-            if (fileInfo.exists()) {
-                FileType type;
-                if (fileInfo.isDir()) type = FileType::Directory;
-                else if (fileInfo.isFile()) type = FileType::File;
-                else if (fileInfo.isSymLink()) type = FileType::Symlink;
-                else if (fileInfo.isExecutable()) type = FileType::Executable;
-                else type = FileType::Unknown;
-                addFileRecord({ fileInfo.fileName(), fileInfo.path(), type });
-            }
+    for (const auto& filePath : results) {
+        QFileInfo fileInfo(filePath);
+        if (fileInfo.exists()) {
+            FileType type;
+            if (fileInfo.isDir()) type = FileType::Directory;
+            else if (fileInfo.isFile()) type = FileType::File;
+            else if (fileInfo.isSymLink()) type = FileType::Symlink;
+            else if (fileInfo.isExecutable()) type = FileType::Executable;
+            else type = FileType::Unknown;
+            addFileRecord({ fileInfo.fileName(), fileInfo.path(), type });
         }
-    } else {
-        qCritical() << "Call to search failed:" << qPrintable(results.error().message());
     }
+
+    emit searchCompleted(this->rowCount());
 }

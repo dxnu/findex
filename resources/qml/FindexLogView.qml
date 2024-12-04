@@ -9,13 +9,36 @@ Component {
         height: mainWindow.height - titleBar.height - mainWindow.footer.height
         clip: true
         TextArea {
+            id: logTextArea
             text: logFileMonitor.fileContent
             readOnly: true
-            wrapMode: Text.Wrap
+            wrapMode: TextEdit.NoWrap
+            selectByMouse: true
             font.pixelSize: 14
             padding: 10
 
             onTextChanged: Qt.callLater(logScrollView.scrollToBottom)
+
+            Menu {
+                id: logContextMenu
+                MenuItem {
+                    text: "Copy"
+                    onTriggered: {
+                        logTextArea.selectAll()
+                        logTextArea.copy()
+                    }
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                acceptedButtons: Qt.RightButton
+                onPressed: {
+                    if (mouse.button === Qt.RightButton) {
+                        logContextMenu.popup()
+                    }
+                }
+            }
         }
 
         function scrollToBottom() {
