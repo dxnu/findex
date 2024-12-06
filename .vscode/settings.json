@@ -55,6 +55,11 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "thread": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "qqmlapplicationengine": "cpp",
+        "qtranslator": "cpp",
+        "qqmlcontext": "cpp",
+        "qlocale": "cpp",
+        "qdebug": "cpp"
     }
 }

@@ -1,11 +1,18 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.3
+import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.0
 import com.search.model 1.0
 import "qrc:findex/js/file-style.js" as FileStyle
 import "qrc:findex/js/utils.js" as Utils
 
 Component {
+
+    Rectangle{
+        y: titleBar.height
+        width: fileGridView.width
+        height: fileGridView.height
+        color: "lightgray"
+
     GridView {
         id: fileGridView
         y: titleBar.height
@@ -158,5 +165,6 @@ Component {
             //     }
             // }
         }
+    }
     }
 }

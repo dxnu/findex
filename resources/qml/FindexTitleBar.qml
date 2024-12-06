@@ -7,7 +7,7 @@ Rectangle {
     id: titleRect
     width: parent.width
     height: parent.height
-    // color: "red"
+    color: "white"
 
     // signal searchCompleted(var result)
 
@@ -71,6 +71,8 @@ Rectangle {
                 anchors.fill: parent
                 anchors.leftMargin: 30
 
+                color: "black"
+
                 onFocusChanged: {
                     if(activeFocus) {
                         searchRect.border.color = "green"
@@ -103,9 +105,15 @@ Rectangle {
         Button {
             id: searchButton
             Layout.alignment: Qt.AlignRight
-            font.family: materialIcons.name
-            font.pixelSize: 20
             text: "\ue8b6"
+            contentItem: Text {
+                text: searchButton.text
+                font.family: materialIcons.name
+                font.pixelSize: 20
+                color: searchButton.hovered ? "#000000" : "#666666"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
             background: Rectangle {
                 implicitWidth: titleRect.height - 20
                 implicitHeight: titleRect.height - 20
@@ -135,9 +143,15 @@ Rectangle {
 
         Button {
             id: gridViewButton
-            font.family: materialIcons.name
-            font.pixelSize: 20
             text: "\ue9b0"
+            contentItem: Text {
+                text: gridViewButton.text
+                font.family: materialIcons.name
+                font.pixelSize: 20
+                color: gridViewButton.hovered ? "#000000" : "#666666"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
             background: Rectangle {
                 implicitWidth: titleRect.height - 20
                 implicitHeight: titleRect.height - 20
@@ -152,9 +166,15 @@ Rectangle {
 
         Button {
             id: listViewButton
-            font.family: materialIcons.name
-            font.pixelSize: 20
             text: "\ue9b9"
+            contentItem: Text {
+                text: listViewButton.text
+                font.family: materialIcons.name
+                font.pixelSize: 20
+                color: listViewButton.hovered ? "#000000" : "#666666"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
             background: Rectangle {
                 implicitWidth: titleRect.height - 20
                 implicitHeight: titleRect.height - 20
@@ -166,9 +186,15 @@ Rectangle {
 
         Button {
             id: treeViewButton
-            font.family: materialIcons.name
-            font.pixelSize: 20
             text: "\ue97a"
+            contentItem: Text {
+                text: treeViewButton.text
+                font.family: materialIcons.name
+                font.pixelSize: 20
+                color: treeViewButton.hovered ? "#000000" : "#666666"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
             background: Rectangle {
                 implicitWidth: titleRect.height - 20
                 implicitHeight: titleRect.height - 20
@@ -180,9 +206,15 @@ Rectangle {
 
         Button {
             id: logButton
-            font.family: materialIcons.name
-            font.pixelSize: 20
             text: "\ue0a8" // e104
+            contentItem: Text {
+                text: logButton.text
+                font.family: materialIcons.name
+                font.pixelSize: 20
+                color: logButton.hovered ? "#000000" : "#666666"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
             background: Rectangle {
                 implicitWidth: titleRect.height - 20
                 implicitHeight: titleRect.height - 20
@@ -193,8 +225,8 @@ Rectangle {
                 logFileMonitor.setFilePath("/data/home/dxnu/.cache/findex/findex.log")
                 mainWindow.currentView = "log"
             }
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Log View")
+            // ToolTip.visible: hovered
+            // ToolTip.text: qsTr("Log View")
         }
     }
 
@@ -207,9 +239,15 @@ Rectangle {
 
         Button {
             id: settingButton
-            font.family: materialIcons.name
-            font.pixelSize: 20
             text: "\ue5d2"
+            contentItem: Text {
+                text: settingButton.text
+                font.family: materialIcons.name
+                font.pixelSize: 20
+                color: settingButton.hovered ? "#000000" : "#666666"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
             background: Rectangle {
                 implicitWidth: 50
                 implicitHeight: titleRect.height
@@ -224,9 +262,15 @@ Rectangle {
 
         Button {
             id: minimumButton
-            font.family: materialIcons.name
-            font.pixelSize: 20
             text: "\ue15b"
+            contentItem: Text {
+                text: minimumButton.text
+                font.family: materialIcons.name
+                font.pixelSize: 20
+                color: minimumButton.hovered ? "#000000" : "#666666"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
             background: Rectangle {
                 implicitWidth: 50
                 implicitHeight: titleRect.height
@@ -237,9 +281,15 @@ Rectangle {
 
         Button {
             id: maximumButton
-            font.family: materialIcons.name
-            font.pixelSize: 20
             text: mainWindow.visibility === Window.Maximized ? "\ue65b" : "\ue3c0" // f743/e3e0
+            contentItem: Text {
+                text: maximumButton.text
+                font.family: materialIcons.name
+                font.pixelSize: 20
+                color: maximumButton.hovered ? "#000000" : "#666666"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
             background: Rectangle {
                 implicitWidth: 50
                 implicitHeight: titleRect.height
@@ -250,9 +300,15 @@ Rectangle {
 
         Button {
             id: closeButton
-            font.family: materialIcons.name
-            font.pixelSize: 20
             text: "\ue5cd"
+            contentItem: Text {
+                text: closeButton.text
+                font.family: materialIcons.name
+                font.pixelSize: 20
+                color: closeButton.hovered ? "#000000" : "#666666"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
             background: Rectangle {
                 implicitWidth: 50
                 implicitHeight: titleRect.height

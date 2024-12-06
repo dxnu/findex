@@ -8,6 +8,12 @@ Rectangle {
 
     property string query_stats: "No Search Performed"
 
+    Rectangle {
+        width: parent.width
+        height: 1
+        color: "red"
+    }
+
     Row {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter

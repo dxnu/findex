@@ -11,6 +11,8 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+    QGuiApplication::setStyle("fusion");
+
     QQmlApplicationEngine engine;
 
     qDebug() << "Qt Version:" << QT_VERSION_STR;

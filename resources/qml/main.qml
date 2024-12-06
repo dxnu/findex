@@ -1,7 +1,8 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
-import QtQuick.Controls 2.3
+import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.0
+import DGui 1.0
 import "qrc:findex/js/view.js" as View
 
 ApplicationWindow {
@@ -159,7 +160,7 @@ ApplicationWindow {
 
     Connections {
         target: searchController.model()
-        onSearchCompleted: {
+        function onSearchCompleted(searchCount) {
             findexFooter.query_stats = searchCount + " Results"
         }
     }
