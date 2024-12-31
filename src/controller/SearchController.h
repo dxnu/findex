@@ -19,6 +19,8 @@ public:
 
     Q_INVOKABLE int size() const;
     
+    Q_INVOKABLE QString cacheDirectory() const;
+
     Q_INVOKABLE void clear();
 
     Q_INVOKABLE void indexFilesInDirectory(const QString& directoryPath) const;

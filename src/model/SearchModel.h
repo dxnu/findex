@@ -3,17 +3,23 @@
 
 #include <memory>
 
+#include <qqml.h>
 #include <QAbstractListModel>
+#include <QAbstractTableModel>
 #include <QStringList>
 #include <QtDBus>
 
 
-class SearchModel : public QAbstractListModel {
+class SearchModel : public QAbstractTableModel {
     Q_OBJECT
+    QML_ELEMENT
+
 public:
     enum FileRecordRoles {
         FileNameRole = Qt::UserRole + 1,
         FullPathRole,
+        LastModifiedRole,
+        SizeRole,
         FileTypeRole
     };
     enum FileType {
@@ -28,11 +34,17 @@ public:
     struct FileRecord {
         QString fileName;
         QString fullPath;
-        FileType fileType;
+        QString lastModified;
+        // qint64 size;
+        QString size;
+        // FileType fileType;
+        QString fileType;
     };
 
     explicit SearchModel(QObject* parent = nullptr);
     ~SearchModel();
+
+    QString cacheDirectory() const;
 
     void search(const QString& path, const QString& keywords, int offset, int maxCount);
     void search(const QString& keywords);
@@ -46,13 +58,20 @@ public:
 
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
+    int columnCount(const QModelIndex& parent = QModelIndex()) const override;
+
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
 protected:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
     void handleSearchResults(const QStringList& results);
+
+    QString formatFileSize(qint64 size);
+    QString enumToQString(FileType fileType);
 
 signals:
     void searchCompleted(int searchCount);

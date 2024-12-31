@@ -33,8 +33,13 @@ Menu {
     }
 
     MenuItem {
-        text: "新建窗口"
-        onTriggered: console.log("新建窗口")
+        text: "缓存目录"
+        onTriggered: {
+            var cacheDirectory = searchController.cacheDirectory();
+            if (cacheDirectory) {
+                Qt.openUrlExternally("file://" + cacheDirectory);
+            }
+        }
     }
     MenuItem {
         text: "新建标签页"

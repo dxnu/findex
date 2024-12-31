@@ -1,8 +1,9 @@
 function loadView(currentView) {
-    if (currentView === "grid") return gridView;
-    else if (currentView === "list") return listView;
-    else if (currentView === "tree") return treeView;
-    else return logView;
+    if (currentView === "grid") return "FindexGridView.qml";
+    else if (currentView === "list") return "FindexListView.qml";
+    else if (currentView === "table") return "FindexTableView.qml";
+    // else if (currentView === "tree") return treeView;
+    else return "FindexLogView.qml";
     // currentView === "grid" ? gridView :
     //                      currentView === "list" ? listView :
     //                      treeView

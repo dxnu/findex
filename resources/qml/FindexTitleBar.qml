@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.0
@@ -8,8 +8,23 @@ Rectangle {
     width: parent.width
     height: parent.height
     color: "white"
+    // radius: 20
 
     // signal searchCompleted(var result)
+    DragHandler {
+        target: null
+        onActiveChanged: if(active) { mainWindow.startSystemMove() }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onDoubleClicked: {
+            console.log("double clicked")
+            mainWindow.visibility === Window.Maximized
+                ? mainWindow.showNormal()
+                : mainWindow.showMaximized();
+        }
+    }
 
     RowLayout {
         id: searchRowLayout
@@ -93,7 +108,7 @@ Rectangle {
                         findexFooter.query_stats = "Searching...";
                         searchController.clear()
                         searchController.search(searchTextField.text)
-                        // searchController.search("", searchTextField.text, 0, 10000)
+                        // searchController.search("", searchTextField.text, 0, 1000)
                         // searchCompleted(result)
                     } /*else { // 
                         searchController.clear()
@@ -181,7 +196,7 @@ Rectangle {
                 color: listViewButton.hovered ? "#d6d6d6" : "#ffffff"
                 radius: 10
             }
-            onClicked: mainWindow.currentView = "list"
+            onClicked: mainWindow.currentView = "table"
         }
 
         Button {
@@ -222,7 +237,7 @@ Rectangle {
                 radius: 10
             }
             onClicked: {
-                logFileMonitor.setFilePath("/data/home/dxnu/.cache/findex/findex.log")
+                logFileMonitor.setFilePath("/home/dxnu/private/limiu/findex/src/CMakeLists.txt")
                 mainWindow.currentView = "log"
             }
             // ToolTip.visible: hovered

@@ -1,5 +1,6 @@
 function getIcon(fileType) {
-    if (fileType === SearchModel.Directory)
+    // if (fileType === SearchModel.Directory)
+    if (fileType === "Directory")
         return "\ue2c7";
     else
         return "\ue873";
@@ -10,4 +11,7 @@ function getColor(fileType) {
         return "#5985E1";
     else
         return "#5985E1";
+}
+
+function viewFile(fileType) {    
 }

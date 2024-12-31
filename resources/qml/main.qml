@@ -1,8 +1,7 @@
-import QtQuick 2.0
+import QtQuick
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.0
-import DGui 1.0
 import "qrc:findex/js/view.js" as View
 
 ApplicationWindow {
@@ -13,7 +12,7 @@ ApplicationWindow {
     minimumHeight: 600
     visible: true
     title: qsTr("findex")
-    // flags: Qt.FramelessWindowHint
+    flags: Qt.FramelessWindowHint
 
     property string currentView: "grid"
 
@@ -41,20 +40,20 @@ ApplicationWindow {
         Layout.fillWidth: true
         Layout.fillHeight: true
 
-        sourceComponent: View.loadView(currentView)
+        source: View.loadView(currentView)
     }
 
-    FindexGridView {
-        id: gridView
-    }
+    // FindexGridView {
+    //     id: gridView
+    // }
 
-    FindexListView {
-        id: listView
-    }
+    // FindexListView {
+    //     id: listView
+    // }
 
-    FindexLogView {
-        id: logView
-    }
+    // FindexLogView {
+    //     id: logView
+    // }
 
     // Component {
     //     id: treeView

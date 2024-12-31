@@ -6,6 +6,7 @@
         <file>qml/FindexListView.qml</file>
         <file>qml/FindexLogView.qml</file>
         <file>qml/FindexSettingMenu.qml</file>
+        <file>qml/FindexTableView.qml</file>
         <file>qml/FindexTitleBar.qml</file>
         <file>qml/main.qml</file>
     </qresource>

@@ -37,7 +37,7 @@
 <context>
     <name>FindexSettingMenu</name>
     <message>
-        <location filename="../qml/FindexSettingMenu.qml" line="81"/>
+        <location filename="../qml/FindexSettingMenu.qml" line="86"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
@@ -45,7 +45,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="15"/>
+        <location filename="../qml/main.qml" line="14"/>
         <source>findex</source>
         <translation type="unfinished"></translation>
     </message>

@@ -34,6 +34,11 @@ Q_INVOKABLE int SearchController::size() const
     return searchModel_->rowCount();
 }
 
+Q_INVOKABLE QString SearchController::cacheDirectory() const
+{
+    return searchModel_->cacheDirectory();
+}
+
 Q_INVOKABLE void SearchController::clear()
 {
     searchModel_->clear();

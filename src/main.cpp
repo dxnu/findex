@@ -5,17 +5,16 @@
 #include <QTranslator>
 #include <QDebug>
 
+#include "controller/FileController.h"
 #include "controller/SearchController.h"
 #include "model/FileMonitor.h"
 
 int main(int argc, char *argv[])
 {
+    qDebug() << "Qt Version:" << QT_VERSION_STR;
     QGuiApplication app(argc, argv);
-    QGuiApplication::setStyle("fusion");
 
     QQmlApplicationEngine engine;
-
-    qDebug() << "Qt Version:" << QT_VERSION_STR;
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
@@ -29,9 +28,11 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<SearchModel>("com.search.model", 1, 0, "SearchModel");
     SearchController* searchController = new SearchController(&engine);
+    FileController* fileController = new FileController(&engine);
     FileMonitor* logFileMonitor = new FileMonitor(&engine);
 
     QQmlContext* context = engine.rootContext();
+    context->setContextProperty("fileController", fileController);
     context->setContextProperty("searchController", searchController);
     context->setContextProperty("logFileMonitor", logFileMonitor);
 

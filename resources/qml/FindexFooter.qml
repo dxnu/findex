@@ -11,7 +11,7 @@ Rectangle {
     Rectangle {
         width: parent.width
         height: 1
-        color: "red"
+        color: "lightgray"
     }
 
     Row {
@@ -21,11 +21,13 @@ Rectangle {
         spacing: 10
 
         Text {
+            anchors.verticalCenter: parent.verticalCenter
             font.family: materialIcons.name
             font.pixelSize: 20
             text: "\ue4fc"
         }
         Text {
+            anchors.verticalCenter: parent.verticalCenter
             text: query_stats
         }
     }
