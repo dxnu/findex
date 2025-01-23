@@ -5,6 +5,8 @@
         <file>qml/FindexGridView.qml</file>
         <file>qml/FindexListView.qml</file>
         <file>qml/FindexLogView.qml</file>
+        <file>qml/FindexMenuBar.qml</file>
+        <file>qml/FindexSearchBar.qml</file>
         <file>qml/FindexSettingMenu.qml</file>
         <file>qml/FindexTableView.qml</file>
         <file>qml/FindexTitleBar.qml</file>

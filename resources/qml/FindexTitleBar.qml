@@ -237,7 +237,7 @@ Rectangle {
                 radius: 10
             }
             onClicked: {
-                logFileMonitor.setFilePath("/home/dxnu/private/limiu/findex/src/CMakeLists.txt")
+                logFileMonitor.setFilePath("/var/cache/deepin/deepin-anything/app.log")
                 mainWindow.currentView = "log"
             }
             // ToolTip.visible: hovered

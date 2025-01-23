@@ -209,6 +209,9 @@ QHash<int, QByteArray> SearchModel::roleNames() const
 void SearchModel::handleSearchResults(const QStringList& results)
 {
     for (const auto& filePath : results) {
+        // QString cleanFilePath = filePath;
+        // cleanFilePath.remove("<span style='background-color:yellow'>");
+        // cleanFilePath.remove("</span>");
         QFileInfo fileInfo(filePath);
         if (fileInfo.exists()) {
             FileType type;
@@ -217,7 +220,7 @@ void SearchModel::handleSearchResults(const QStringList& results)
             else if (fileInfo.isSymLink()) type = FileType::Symlink;
             else if (fileInfo.isExecutable()) type = FileType::Executable;
             else type = FileType::Unknown;
-            addFileRecord({ fileInfo.fileName(), fileInfo.path(),
+            addFileRecord({ fileInfo.fileName()/*filePath.mid(filePath.lastIndexOf('/') + 1)*/, fileInfo.path(),
                 fileInfo.lastModified().toString("yyyy-MM-dd HH:mm:ss"),
                 formatFileSize(fileInfo.size()), enumToQString(type) });
         }

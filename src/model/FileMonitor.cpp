@@ -30,8 +30,7 @@ void FileMonitor::onFileChanged() {
     readFile();
 }
 
-void FileMonitor::readFile()
-{
+void FileMonitor::readFile() {
     QFile file(filePath_);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in(&file);

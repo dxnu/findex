@@ -4,33 +4,61 @@
 <context>
     <name>FindexMenuBar</name>
     <message>
-        <location filename="../qml/FindexMenuBar.qml" line="8"/>
+        <location filename="../qml/FindexMenuBar.qml" line="9"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FindexMenuBar.qml" line="10"/>
+        <location filename="../qml/FindexMenuBar.qml" line="11"/>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FindexMenuBar.qml" line="15"/>
+        <location filename="../qml/FindexMenuBar.qml" line="16"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FindexMenuBar.qml" line="17"/>
+        <location filename="../qml/FindexMenuBar.qml" line="18"/>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FindexMenuBar.qml" line="20"/>
+        <location filename="../qml/FindexMenuBar.qml" line="21"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FindexMenuBar.qml" line="22"/>
+        <location filename="../qml/FindexMenuBar.qml" line="24"/>
+        <source>Cache Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FindexMenuBar.qml" line="36"/>
+        <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FindexMenuBar.qml" line="38"/>
+        <source>Dark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FindexMenuBar.qml" line="42"/>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FindexMenuBar.qml" line="48"/>
         <source>&amp;About</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FindexSearchBar</name>
+    <message>
+        <location filename="../qml/FindexSearchBar.qml" line="30"/>
+        <source>输入文件名称，快速找你想要</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -45,9 +73,9 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="14"/>
+        <location filename="../qml/main.qml" line="15"/>
         <source>findex</source>
-        <translation type="unfinished"></translation>
+        <translation>径寻</translation>
     </message>
 </context>
 </TS>

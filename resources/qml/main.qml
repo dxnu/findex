@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Window 2.0
-import QtQuick.Controls 2.5
+import QtQuick.Controls
+import QtQuick.Controls.Material
 import QtQuick.Layouts 1.0
 import "qrc:findex/js/view.js" as View
 
@@ -12,28 +13,39 @@ ApplicationWindow {
     minimumHeight: 600
     visible: true
     title: qsTr("findex")
-    flags: Qt.FramelessWindowHint
+    // flags: Qt.FramelessWindowHint
 
+    property string currentTheme: "dark"
     property string currentView: "grid"
+    Material.theme: currentTheme === "dark" ? Material.Dark : Material.Light
+
+    SystemPalette { id: findexPalette; colorGroup: SystemPalette.Active }
+
+    menuBar: FindexMenuBar {
+        width: parent.width
+        height: 40
+    }
 
     FontLoader {
         id: materialIcons
-        source: "qrc:/fonts/MaterialSymbolsOutlined-Light.ttf"
+        source: "qrc:/fonts/MaterialIcons-Regular.ttf"
     }
     FontLoader {
         id: materialFilled
         source: "qrc:/fonts/MaterialSymbolsOutlined_Filled-Regular.ttf"
     }
 
-    FindexTitleBar {
-        id: titleBar
-        anchors.top: parent.top
-        width: parent.width
-        height: 50
-        // onSearchCompleted: {
-        //     // outputText.text = result.join("\n")
-        // }
-    }
+    FindexSearchBar {}
+
+    // FindexTitleBar {
+    //     id: titleBar
+    //     anchors.top: parent.top
+    //     width: parent.width
+    //     height: 50
+    //     // onSearchCompleted: {
+    //     //     // outputText.text = result.join("\n")
+    //     // }
+    // }
 
     Loader {
         id: viewLoader
