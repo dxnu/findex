@@ -1,6 +1,7 @@
 #include "SearchModel.h"
 
 #include <QtConcurrent/QtConcurrent>
+#include <QThreadPool>
 #include <QDebug>
 
 SearchModel::SearchModel(QObject* parent)
@@ -50,7 +51,7 @@ void SearchModel::search(const QString& path, const QString& keywords, int offse
     // }
 
     if (iface_->isValid()) {
-        QtConcurrent::run([=] {
+        QThreadPool::globalInstance()->start([=] {
             uint32_t startOffset = 0;
             uint32_t endOffset = 0;
             QStringList allResults;
@@ -86,9 +87,27 @@ void SearchModel::search(const QString &keywords)
         return;
     }
 
+    // if (trimmedKeywords.contains("type:")) {
+    //     auto pos = trimmedKeywords
+    // }
+    QString type = "type:";
+    int index = trimmedKeywords.indexOf(type);
+    if (index != -1) {
+        int start = index + type.length();
+        int end = trimmedKeywords.indexOf(' ', start);
+        if (end == -1) end = trimmedKeywords.length();
+        auto realType = trimmedKeywords.mid(start, end - start);
+        trimmedKeywords.remove(type + realType);
+        trimmedKeywords = trimmedKeywords.trimmed();
+        type = realType;
+    }
+
+
     if (iface_->isValid()) {
-        QtConcurrent::run([this, trimmedKeywords = std::move(trimmedKeywords)] {
-            QDBusReply<QStringList> results = iface_->call("search", trimmedKeywords);
+        QThreadPool::globalInstance()->start([this, trimmedKeywords = std::move(trimmedKeywords), type = std::move(type)] {
+            QDBusReply<QStringList> results = 
+                type == "type:" ? iface_->call("search", trimmedKeywords)
+                                : iface_->call("search", trimmedKeywords, type);
             if (results.isValid()) {
                 emit searchResultsReady(results.value());
             } else {
@@ -227,6 +246,7 @@ void SearchModel::handleSearchResults(const QStringList& results)
     }
 
     emit searchCompleted(this->rowCount());
+    emit dataStatusChanged(this->rowCount() == 0);
 }
 
 QString SearchModel::formatFileSize(qint64 size)

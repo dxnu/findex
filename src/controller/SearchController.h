@@ -18,6 +18,8 @@ public:
     Q_INVOKABLE void search(const QString& keywords);
 
     Q_INVOKABLE int size() const;
+
+    Q_INVOKABLE bool empty() const;
     
     Q_INVOKABLE QString cacheDirectory() const;
 

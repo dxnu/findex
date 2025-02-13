@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/AboutWindow.qml</file>
+        <file>qml/FindexDefaultView.qml</file>
         <file>qml/FindexFooter.qml</file>
         <file>qml/FindexGridView.qml</file>
         <file>qml/FindexListView.qml</file>

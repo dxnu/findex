@@ -1,10 +1,11 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
+import QtQuick.Controls.Material
 
 Rectangle {
     height: 40
     width: parent.width
-    color: "lightgray"
+    color: Material.background
 
     property string query_stats: "No Search Performed"
 
@@ -25,10 +26,17 @@ Rectangle {
             font.family: materialIcons.name
             font.pixelSize: 20
             text: "\ue4fc"
+            color: materialStyleHelper.color
         }
         Text {
             anchors.verticalCenter: parent.verticalCenter
             text: query_stats
+            color: materialStyleHelper.color
         }
+    }
+
+    TextField {
+        id: materialStyleHelper
+        visible: false
     }
 }

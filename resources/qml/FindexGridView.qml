@@ -1,5 +1,6 @@
 import QtQuick
-import QtQuick.Controls 2.5
+import QtQuick.Controls
+import QtQuick.Controls.Material
 import QtQuick.Layouts 1.0
 import com.search.model 1.0
 import "qrc:findex/js/file-style.js" as FileStyle
@@ -7,9 +8,9 @@ import "qrc:findex/js/utils.js" as Utils
 
 GridView {
     id: fileGridView
-    y: titleBar.height
+    y: searchBar.height + 10
     width: mainWindow.width
-    height: mainWindow.height - titleBar.height - mainWindow.footer.height
+    height: mainWindow.height - searchBar.height - mainWindow.menuBar.height - mainWindow.footer.height - 10
     clip: true
     model: searchController.model()
     cellWidth: 100
@@ -37,7 +38,7 @@ GridView {
                 radius: 10
 
                 ToolTip {
-                    text: model.fullPath
+                    text: model.fullPath + "/" + model.fileName
                     visible: fileGridViewMouseArea.containsMouse
                     x: parent.x
                     y: parent.y + parent.height + 5
@@ -88,6 +89,7 @@ GridView {
                 width: parent.width - 10
                 font.pixelSize: 14
                 text: Utils.truncateTextToFit(model.fileName, 15)
+                color: materialStyleHelper.color
                 readOnly: false
                 selectByMouse: true
                 wrapMode: TextEdit.Wrap
@@ -117,6 +119,11 @@ GridView {
                 }
             }
         }
+    }
+
+    TextField {
+        id: materialStyleHelper
+        visible: false
     }
     
     ScrollBar.vertical: ScrollBar {}

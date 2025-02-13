@@ -77,6 +77,8 @@ signals:
     void searchCompleted(int searchCount);
     void searchResultsReady(const QStringList& results);
 
+    void dataStatusChanged(bool empty);
+
 private:
     QList<FileRecord> records_;
     std::unique_ptr<QDBusInterface> iface_;

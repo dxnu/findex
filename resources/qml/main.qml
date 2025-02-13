@@ -35,7 +35,9 @@ ApplicationWindow {
         source: "qrc:/fonts/MaterialSymbolsOutlined_Filled-Regular.ttf"
     }
 
-    FindexSearchBar {}
+    FindexSearchBar {
+        id: searchBar
+    }
 
     // FindexTitleBar {
     //     id: titleBar

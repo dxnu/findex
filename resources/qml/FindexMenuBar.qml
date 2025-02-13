@@ -15,7 +15,19 @@ MenuBar {
 
     Menu { title: qsTr("Edit") }
     
-    Menu { title: qsTr("View") }
+    Menu {
+        title: qsTr("View")
+
+        Action {
+            text: qsTr("Grid")
+            onTriggered: currentView = "grid"
+        }
+
+        Action {
+            text: qsTr("Table")
+            onTriggered: currentView = "table"
+        }
+    }
 
     Menu {
         title: qsTr("Help")
