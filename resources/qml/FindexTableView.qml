@@ -14,7 +14,7 @@ Rectangle {
         anchors.top: parent.top
         syncView: fileTableView
         clip: true
-        visible: false
+        visible: true
         boundsBehavior: Flickable.StopAtBounds
 
         delegate: Rectangle {
@@ -74,12 +74,56 @@ Rectangle {
                 anchors.rightMargin: 10
             }
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: fileTableView.selectionModel.select(
+            Menu {
+                id: tabviewContextMenu
+                MenuItem {
+                    text: "Open"
+                    implicitHeight: 35
+                    onTriggered: Qt.openUrlExternally("file://" + model.fullPath + "/" + model.fileName)
+                }
+                MenuItem {
+                    text: "Copy path"
+                    implicitHeight: 35
+                    onTriggered: clipboardManager.copy(model.fullPath)
+                }
+                MenuItem {
+                    text: "Copy full path"
+                    implicitHeight: 35
+                    onTriggered: clipboardManager.copy(model.fullPath + "/" + model.fileName)
+                }
+            }
+
+            function selectClickedIndex() {
+                fileTableView.selectionModel.select(
                     fileTableView.model.index(row, 0),
                     ItemSelectionModel.ClearAndSelect | ItemSelectionModel.Rows
                 )
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                Timer {
+                    id: clickTimer
+                    interval: 200
+                    onTriggered: selectClickedIndex()
+                }
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
+                onClicked: (mouse) => {
+                    if (mouse.button === Qt.RightButton) {
+                        selectClickedIndex()
+                        tabviewContextMenu.popup()
+                    } else if (mouse.button === Qt.LeftButton) {
+                        if (clickTimer.running) {
+                            // double click
+                            selectClickedIndex()
+                            Qt.openUrlExternally("file://" + model.fullPath + "/" + model.fileName)
+                            clickTimer.stop()
+                        } else {
+                            // single click
+                            clickTimer.restart()
+                        }
+                    }
+                }
             }
 
             required property int column
@@ -135,6 +179,7 @@ Rectangle {
         anchors.centerIn: parent
         text: "No more results"
         color: materialStyleHelper.color
+        visible: false
     }
 
     Connections {

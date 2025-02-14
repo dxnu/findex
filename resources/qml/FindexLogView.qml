@@ -3,9 +3,9 @@ import QtQuick.Controls 2.3
 
 ScrollView {
     id: logScrollView
-    y: titleBar.height
+    y: searchBar.height + 10
     width: mainWindow.width
-    height: mainWindow.height - titleBar.height - mainWindow.footer.height
+    height: mainWindow.height - searchBar.height - mainWindow.menuBar.height - mainWindow.footer.height - 10
     clip: true
     TextArea {
         id: logTextArea

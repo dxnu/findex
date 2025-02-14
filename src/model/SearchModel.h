@@ -68,7 +68,7 @@ protected:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    void handleSearchResults(const QStringList& results);
+    void handleSearchResults(QDBusPendingCallWatcher* call);
 
     QString formatFileSize(qint64 size);
     QString enumToQString(FileType fileType);
@@ -82,6 +82,7 @@ signals:
 private:
     QList<FileRecord> records_;
     std::unique_ptr<QDBusInterface> iface_;
+    QDBusPendingCallWatcher* watcher_;
 };
 
 #endif // SEARCH_MODEL_H

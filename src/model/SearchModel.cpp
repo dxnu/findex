@@ -5,7 +5,7 @@
 #include <QDebug>
 
 SearchModel::SearchModel(QObject* parent)
-    : QAbstractTableModel(parent)
+    : QAbstractTableModel(parent), watcher_(nullptr)
 {
     qDebug() << "SearchModel created:" << this;
     if (QDBusConnection::systemBus().isConnected()) {
@@ -14,8 +14,6 @@ SearchModel::SearchModel(QObject* parent)
                                                   "com.deepin.anything",
                                                   QDBusConnection::systemBus());
     }
-
-    connect(this, &SearchModel::searchResultsReady, this, &SearchModel::handleSearchResults);
 }
 
 SearchModel::~SearchModel()
@@ -80,16 +78,21 @@ void SearchModel::search(const QString& path, const QString& keywords, int offse
     }
 }
 
-void SearchModel::search(const QString &keywords)
+void SearchModel::search(const QString& keywords)
 {
+    qDebug() << "search: " << keywords;
+
+    if (watcher_) {
+        disconnect(watcher_, &QDBusPendingCallWatcher::finished, this, &SearchModel::handleSearchResults);
+        watcher_->deleteLater();
+        watcher_ = nullptr;   
+    }
+
     auto trimmedKeywords = keywords.trimmed();
     if (trimmedKeywords.isEmpty()) {
         return;
     }
 
-    // if (trimmedKeywords.contains("type:")) {
-    //     auto pos = trimmedKeywords
-    // }
     QString type = "type:";
     int index = trimmedKeywords.indexOf(type);
     if (index != -1) {
@@ -102,18 +105,12 @@ void SearchModel::search(const QString &keywords)
         type = realType;
     }
 
-
     if (iface_->isValid()) {
-        QThreadPool::globalInstance()->start([this, trimmedKeywords = std::move(trimmedKeywords), type = std::move(type)] {
-            QDBusReply<QStringList> results = 
-                type == "type:" ? iface_->call("search", trimmedKeywords)
-                                : iface_->call("search", trimmedKeywords, type);
-            if (results.isValid()) {
-                emit searchResultsReady(results.value());
-            } else {
-                qCritical() << "Call to search failed:" << qPrintable(results.error().message());
-            }
-        });
+        auto pendingCall = type == "type:"
+            ? iface_->asyncCall("search", trimmedKeywords)
+            : iface_->asyncCall("search", trimmedKeywords, type);
+        watcher_ = new QDBusPendingCallWatcher(pendingCall, this);
+        connect(watcher_, &QDBusPendingCallWatcher::finished, this, &SearchModel::handleSearchResults);
     }
 }
 
@@ -225,9 +222,15 @@ QHash<int, QByteArray> SearchModel::roleNames() const
     return roles;
 }
 
-void SearchModel::handleSearchResults(const QStringList& results)
+void SearchModel::handleSearchResults(QDBusPendingCallWatcher* call)
 {
-    for (const auto& filePath : results) {
+    QDBusPendingReply<QStringList> reply = *call;
+    if (!reply.isValid()) {
+        qCritical() << "Call to search failed:" << qPrintable(reply.error().message());
+        return;
+    }
+
+    for (const auto& filePath : reply.value()) {
         // QString cleanFilePath = filePath;
         // cleanFilePath.remove("<span style='background-color:yellow'>");
         // cleanFilePath.remove("</span>");
@@ -247,6 +250,8 @@ void SearchModel::handleSearchResults(const QStringList& results)
 
     emit searchCompleted(this->rowCount());
     emit dataStatusChanged(this->rowCount() == 0);
+    call->deleteLater();
+    watcher_ = nullptr;
 }
 
 QString SearchModel::formatFileSize(qint64 size)

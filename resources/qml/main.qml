@@ -16,7 +16,7 @@ ApplicationWindow {
     // flags: Qt.FramelessWindowHint
 
     property string currentTheme: "dark"
-    property string currentView: "grid"
+    property string currentView: "table"
     Material.theme: currentTheme === "dark" ? Material.Dark : Material.Light
 
     SystemPalette { id: findexPalette; colorGroup: SystemPalette.Active }
@@ -177,4 +177,6 @@ ApplicationWindow {
             findexFooter.query_stats = searchCount + " Results"
         }
     }
+
+    ClipboardManager { id: clipboardManager }
 }
