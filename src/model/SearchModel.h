@@ -35,9 +35,7 @@ public:
         QString fileName;
         QString fullPath;
         QString lastModified;
-        // qint64 size;
         QString size;
-        // FileType fileType;
         QString fileType;
     };
 
@@ -47,7 +45,9 @@ public:
     QString cacheDirectory() const;
 
     void search(const QString& path, const QString& keywords, int offset, int maxCount);
+
     void search(const QString& keywords);
+    void async_search(const QString& keywords);
 
     void indexFilesInDirectory(const QString& directoryPath) const;
 
@@ -67,8 +67,12 @@ public:
 protected:
     QHash<int, QByteArray> roleNames() const override;
 
+public slots:
+    void handleAsyncSearchResults(const QStringList& results);
+
 private:
     void handleSearchResults(QDBusPendingCallWatcher* call);
+    void handleResults(const QStringList& results);
 
     QString formatFileSize(qint64 size);
     QString enumToQString(FileType fileType);

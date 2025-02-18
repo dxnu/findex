@@ -29,6 +29,11 @@ Q_INVOKABLE void SearchController::search(const QString &keywords)
     searchModel_->search(keywords);
 }
 
+Q_INVOKABLE void SearchController::async_search(const QString &keywords)
+{
+    searchModel_->async_search(keywords);
+}
+
 Q_INVOKABLE int SearchController::size() const
 {
     return searchModel_->rowCount();

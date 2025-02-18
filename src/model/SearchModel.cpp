@@ -1,5 +1,7 @@
 #include "SearchModel.h"
 
+#include <filesystem>
+
 #include <QtConcurrent/QtConcurrent>
 #include <QThreadPool>
 #include <QDebug>
@@ -13,6 +15,7 @@ SearchModel::SearchModel(QObject* parent)
                                                   "/com/deepin/anything",
                                                   "com.deepin.anything",
                                                   QDBusConnection::systemBus());
+        connect(iface_.get(), SIGNAL(asyncSearchCompleted(QStringList)), this, SLOT(handleAsyncSearchResults(QStringList)));
     }
 }
 
@@ -111,6 +114,18 @@ void SearchModel::search(const QString& keywords)
             : iface_->asyncCall("search", trimmedKeywords, type);
         watcher_ = new QDBusPendingCallWatcher(pendingCall, this);
         connect(watcher_, &QDBusPendingCallWatcher::finished, this, &SearchModel::handleSearchResults);
+    }
+}
+
+void SearchModel::async_search(const QString& keywords)
+{
+    auto trimmedKeywords = keywords.trimmed();
+    if (trimmedKeywords.isEmpty()) {
+        return;
+    }
+
+    if (iface_->isValid()) {
+        iface_->call("async_search", trimmedKeywords);
     }
 }
 
@@ -222,36 +237,55 @@ QHash<int, QByteArray> SearchModel::roleNames() const
     return roles;
 }
 
+void SearchModel::handleAsyncSearchResults(const QStringList& results)
+{
+    qDebug() << "Received async search results: " << results.size();
+    handleResults(results);
+}
+
 void SearchModel::handleSearchResults(QDBusPendingCallWatcher* call)
 {
+    qDebug() << "get results";
     QDBusPendingReply<QStringList> reply = *call;
     if (!reply.isValid()) {
         qCritical() << "Call to search failed:" << qPrintable(reply.error().message());
         return;
     }
 
-    for (const auto& filePath : reply.value()) {
-        // QString cleanFilePath = filePath;
-        // cleanFilePath.remove("<span style='background-color:yellow'>");
-        // cleanFilePath.remove("</span>");
-        QFileInfo fileInfo(filePath);
-        if (fileInfo.exists()) {
-            FileType type;
-            if (fileInfo.isDir()) type = FileType::Directory;
-            else if (fileInfo.isFile()) type = FileType::File;
-            else if (fileInfo.isSymLink()) type = FileType::Symlink;
-            else if (fileInfo.isExecutable()) type = FileType::Executable;
-            else type = FileType::Unknown;
-            addFileRecord({ fileInfo.fileName()/*filePath.mid(filePath.lastIndexOf('/') + 1)*/, fileInfo.path(),
-                fileInfo.lastModified().toString("yyyy-MM-dd HH:mm:ss"),
-                formatFileSize(fileInfo.size()), enumToQString(type) });
-        }
+    handleResults(reply.value());
+    
+    call->deleteLater();
+    watcher_ = nullptr;
+}
+
+void SearchModel::handleResults(const QStringList& results)
+{
+    qDebug() << "begin of setting results";
+    for (const auto& filePath : results) {
+        QStringList list = filePath.split("<\\>");
+        QFileInfo fileInfo(list[0]);
+        
+
+        addFileRecord({ fileInfo.fileName(), fileInfo.path(),
+                "2025-02-18 00:00:00", list[2], list[1] });
+
+        // if (fileInfo.exists()) {
+            // FileType type;
+            // if (fileInfo.isDir()) type = FileType::Directory;
+            // else if (fileInfo.isFile()) type = FileType::File;
+            // else if (fileInfo.isSymLink()) type = FileType::Symlink;
+            // else if (fileInfo.isExecutable()) type = FileType::Executable;
+            // else type = FileType::Unknown;
+            // addFileRecord({ fileInfo.fileName(), fileInfo.path(),
+            //     fileInfo.lastModified().toString("yyyy-MM-dd HH:mm:ss"),
+            //     formatFileSize(fileInfo.size()), enumToQString(type) });
+        // }
     }
 
     emit searchCompleted(this->rowCount());
     emit dataStatusChanged(this->rowCount() == 0);
-    call->deleteLater();
-    watcher_ = nullptr;
+
+    qDebug() << "end of setting results";
 }
 
 QString SearchModel::formatFileSize(qint64 size)

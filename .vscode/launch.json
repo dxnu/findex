@@ -27,7 +27,7 @@
             "sourceFileMap": {
                 "/build/src": "${workspaceFolder}/src"
             },
-            "visualizerFile": "/home/dxnu/.config/Code/User/workspaceStorage/23f12bbfa76125f561a73c1cf1a8b6ad/tonka3000.qtvsctools/qt.natvis.xml"
+            "visualizerFile": "/home/dxnu/.config/Code/User/workspaceStorage/425f1b7ce0e96898f753ee98a574919c/tonka3000.qtvsctools/qt.natvis.xml"
         }
     ]
 }

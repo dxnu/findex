@@ -16,6 +16,7 @@ public:
 
     Q_INVOKABLE void search(const QString& path, const QString& keywords, int offset, int maxCount);
     Q_INVOKABLE void search(const QString& keywords);
+    Q_INVOKABLE void async_search(const QString& keywords);
 
     Q_INVOKABLE int size() const;
 
