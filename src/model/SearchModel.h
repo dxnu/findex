@@ -17,7 +17,7 @@ class SearchModel : public QAbstractTableModel {
 public:
     enum FileRecordRoles {
         FileNameRole = Qt::UserRole + 1,
-        FullPathRole,
+        FilePathRole,
         LastModifiedRole,
         SizeRole,
         FileTypeRole
@@ -33,7 +33,7 @@ public:
 
     struct FileRecord {
         QString fileName;
-        QString fullPath;
+        QString filePath;
         QString lastModified;
         QString size;
         QString fileType;
@@ -74,7 +74,6 @@ private:
     void handleSearchResults(QDBusPendingCallWatcher* call);
     void handleResults(const QStringList& results);
 
-    QString formatFileSize(qint64 size);
     QString enumToQString(FileType fileType);
 
 signals:

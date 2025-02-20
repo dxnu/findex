@@ -13,7 +13,6 @@ Rectangle {
         anchors.fill: parent
         height: parent.height
         rightPadding: 40
-        // background: null
         font.pixelSize: 14
         placeholderText: focus || text.length > 0 ? null : qsTr("输入文件名称，快速找你想要")
         selectByMouse: true

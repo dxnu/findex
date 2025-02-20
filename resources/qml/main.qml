@@ -25,6 +25,9 @@ ApplicationWindow {
         width: parent.width
         height: 40
     }
+    // header: FindexHeader {
+    //     height: 40
+    // }
 
     FontLoader {
         id: materialIcons
@@ -179,4 +182,5 @@ ApplicationWindow {
     }
 
     ClipboardManager { id: clipboardManager }
+    FileManager { id: fileManager }
 }

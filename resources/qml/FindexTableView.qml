@@ -74,24 +74,7 @@ Rectangle {
                 anchors.rightMargin: 10
             }
 
-            Menu {
-                id: tabviewContextMenu
-                MenuItem {
-                    text: "Open"
-                    implicitHeight: 35
-                    onTriggered: Qt.openUrlExternally("file://" + model.fullPath + "/" + model.fileName)
-                }
-                MenuItem {
-                    text: "Copy path"
-                    implicitHeight: 35
-                    onTriggered: clipboardManager.copy(model.fullPath)
-                }
-                MenuItem {
-                    text: "Copy full path"
-                    implicitHeight: 35
-                    onTriggered: clipboardManager.copy(model.fullPath + "/" + model.fileName)
-                }
-            }
+            FileActionsMenu { id: fileActionsMenu }
 
             function selectClickedIndex() {
                 fileTableView.selectionModel.select(
@@ -111,12 +94,12 @@ Rectangle {
                 onClicked: (mouse) => {
                     if (mouse.button === Qt.RightButton) {
                         selectClickedIndex()
-                        tabviewContextMenu.popup()
+                        fileActionsMenu.popup()
                     } else if (mouse.button === Qt.LeftButton) {
                         if (clickTimer.running) {
                             // double click
                             selectClickedIndex()
-                            Qt.openUrlExternally("file://" + model.fullPath + "/" + model.fileName)
+                            fileManager.open(model.filePath + "/" + model.fileName)
                             clickTimer.stop()
                         } else {
                             // single click

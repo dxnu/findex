@@ -67,7 +67,7 @@
 <context>
     <name>FindexSearchBar</name>
     <message>
-        <location filename="../qml/FindexSearchBar.qml" line="18"/>
+        <location filename="../qml/FindexSearchBar.qml" line="17"/>
         <source>输入文件名称，快速找你想要</source>
         <translation type="unfinished"></translation>
     </message>

@@ -20,6 +20,7 @@ GridView {
             fileGridView.currentIndex = -1
         }
     }
+
     delegate: Item {
         width: fileGridView.cellWidth
         height: fileGridView.cellHeight
@@ -38,7 +39,7 @@ GridView {
                 radius: 10
 
                 ToolTip {
-                    text: model.fullPath + "/" + model.fileName
+                    text: model.filePath + "/" + model.fileName
                     visible: fileGridViewMouseArea.containsMouse
                     x: parent.x
                     y: parent.y + parent.height + 5
@@ -52,6 +53,8 @@ GridView {
                     color: FileStyle.getColor(model.fileType)
                 }
 
+                FileActionsMenu { id: fileActionsMenu }
+
                 MouseArea {
                     id: fileGridViewMouseArea
                     anchors.fill: parent
@@ -61,22 +64,22 @@ GridView {
                         interval: 200
                         onTriggered: fileGridView.currentIndex = index
                     }
-                    onClicked: { // external captured
-                        if (clickTimer.running) {
-                            // double clicked
-                            // if (model.fileType === SearchModel.Directory) {
-                            //     console.log("double clicked")
-                            //     Qt.openUrlExternally("file://" + model.fullPath);
-                            // }
-                            console.log("double clicked")
-                            // if (!fileController.openExternally(model.fullPath + "/" + model.fileName)) {
-                            //     console.log("Cannot open this file")
-                            // }
-                            Qt.openUrlExternally("file://" + model.fullPath + "/" + model.fileName)
-                            clickTimer.stop()
-                        } else {
-                            // single clicked
-                            clickTimer.restart()
+
+                    acceptedButtons: Qt.LeftButton | Qt.RightButton
+                    onClicked: (mouse) => { // external captured
+                        if (mouse.button === Qt.RightButton) {
+                            fileGridView.currentIndex = index
+                            fileActionsMenu.popup()
+                        } else if (mouse.button === Qt.LeftButton) {
+                            if (clickTimer.running) {
+                                // double clicked
+                                fileGridView.currentIndex = index
+                                fileManager.open(model.filePath + "/" + model.fileName)
+                                clickTimer.stop()
+                            } else {
+                                // single clicked
+                                clickTimer.restart()
+                            }
                         }
                     }
                 }

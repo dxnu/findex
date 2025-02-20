@@ -177,8 +177,8 @@ QVariant SearchModel::data(const QModelIndex& index, int role) const
     const FileRecord& record = records_[index.row()];
     if (role == FileNameRole)
         return record.fileName;
-    else if (role == FullPathRole)
-        return record.fullPath;
+    else if (role == FilePathRole)
+        return record.filePath;
     else if (role == LastModifiedRole)
         return record.lastModified;
     else if (role == SizeRole)
@@ -188,7 +188,7 @@ QVariant SearchModel::data(const QModelIndex& index, int role) const
     else if (role == Qt::DisplayRole) {
         switch (index.column()) {
             case 0: return record.fileName;
-            case 1: return record.fullPath;
+            case 1: return record.filePath;
             case 2: return record.lastModified;
             case 3: return record.size;
             case 4: return record.fileType;
@@ -229,7 +229,7 @@ QHash<int, QByteArray> SearchModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[FileNameRole]     = "fileName";
-    roles[FullPathRole]     = "fullPath";
+    roles[FilePathRole]     = "filePath";
     roles[LastModifiedRole] = "lastModified";
     roles[SizeRole]         = "size";
     roles[FileTypeRole]     = "fileType";
@@ -264,45 +264,13 @@ void SearchModel::handleResults(const QStringList& results)
     for (const auto& filePath : results) {
         QStringList list = filePath.split("<\\>");
         QFileInfo fileInfo(list[0]);
-        
-
-        addFileRecord({ fileInfo.fileName(), fileInfo.path(),
-                "2025-02-18 00:00:00", list[2], list[1] });
-
-        // if (fileInfo.exists()) {
-            // FileType type;
-            // if (fileInfo.isDir()) type = FileType::Directory;
-            // else if (fileInfo.isFile()) type = FileType::File;
-            // else if (fileInfo.isSymLink()) type = FileType::Symlink;
-            // else if (fileInfo.isExecutable()) type = FileType::Executable;
-            // else type = FileType::Unknown;
-            // addFileRecord({ fileInfo.fileName(), fileInfo.path(),
-            //     fileInfo.lastModified().toString("yyyy-MM-dd HH:mm:ss"),
-            //     formatFileSize(fileInfo.size()), enumToQString(type) });
-        // }
+        addFileRecord({ fileInfo.fileName(), fileInfo.path(), list[3], list[2], list[1] });
     }
 
     emit searchCompleted(this->rowCount());
     emit dataStatusChanged(this->rowCount() == 0);
 
     qDebug() << "end of setting results";
-}
-
-QString SearchModel::formatFileSize(qint64 size)
-{
-    const double KB = 1024.0;
-    const double MB = KB * 1024.0;
-    const double GB = MB * 1024.0;
-
-    if (size < KB) {
-        return QString::number(size) + " bytes";
-    } else if (size < MB) {
-        return QString::number(size / KB, 'f', 2) + " KB";
-    } else if (size < GB) {
-        return QString::number(size / MB, 'f', 2) + " MB";
-    } else {
-        return QString::number(size / GB, 'f', 2) + " GB";
-    }
 }
 
 QString SearchModel::enumToQString(FileType fileType)
