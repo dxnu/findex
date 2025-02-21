@@ -12,13 +12,14 @@ Rectangle {
         id: horizontalHeader
         anchors.left: fileTableView.left
         anchors.top: parent.top
+        anchors.right: parent.right
         syncView: fileTableView
         clip: true
-        visible: true
+        visible: searchController.model().rowCount() > 0
         boundsBehavior: Flickable.StopAtBounds
 
         delegate: Rectangle {
-            implicitWidth: 100 // placehoder value
+            implicitWidth: 200 // placehoder value
             implicitHeight: 25
             color: Material.background
             Text {
@@ -27,6 +28,11 @@ Rectangle {
                 font.bold: true
                 leftPadding: 10
             }
+
+            // Component.onCompleted: {
+            //     console.log("table view is completed")
+            //     fileTableView.resizeColumnWidth()
+            // }
         }
     }
 

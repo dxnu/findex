@@ -2,9 +2,13 @@
 
 #include <filesystem>
 
+#include <sys/stat.h>  // For statx and struct statx
+#include <fcntl.h>     // For AT_FDCWD
+
 #include <QtConcurrent/QtConcurrent>
 #include <QThreadPool>
 #include <QDebug>
+#include <QElapsedTimer>
 
 SearchModel::SearchModel(QObject* parent)
     : QAbstractTableModel(parent), watcher_(nullptr)
@@ -145,16 +149,25 @@ void SearchModel::addFileRecord(FileRecord record)
 
 void SearchModel::deleteFileRecord(int index)
 {
-    QAbstractTableModel::beginResetModel();
+    if (index < 0 || index >= records_.size()) {
+        return;
+    }
+
+    beginRemoveRows(QModelIndex(), index, index);
     records_.removeAt(index);
-    QAbstractTableModel::endResetModel();
+    endRemoveRows();
 }
 
 void SearchModel::clear()
 {
-    QAbstractTableModel::beginResetModel();
-    records_.clear();
-    QAbstractTableModel::endResetModel();
+    // QAbstractTableModel::beginResetModel();
+    // records_.clear();
+    // QAbstractTableModel::endResetModel();
+    if (!records_.isEmpty()) {
+        beginRemoveRows(QModelIndex(), 0, records_.size() - 1);
+        records_.clear();
+        endRemoveRows();
+    }
 }
 
 int SearchModel::rowCount(const QModelIndex& parent) const
@@ -261,20 +274,41 @@ void SearchModel::handleSearchResults(QDBusPendingCallWatcher* call)
 void SearchModel::handleResults(const QStringList& results)
 {
     qDebug() << "begin of setting results";
+    QElapsedTimer timer;
+    timer.start();
     for (const auto& filePath : results) {
         QStringList list = filePath.split("<\\>");
         QFileInfo fileInfo(list[0]);
-        addFileRecord({ fileInfo.fileName(), fileInfo.path(), list[3], list[2], list[1] });
+
+        addFileRecord({ fileInfo.fileName(), fileInfo.path(), 
+            getFileLastWriteTime(list[0])/*fileInfo.lastModified().toString("yyyy-MM-dd HH:mm:ss")*/,
+            list[2], list[1] });
     }
 
     emit searchCompleted(this->rowCount());
     emit dataStatusChanged(this->rowCount() == 0);
 
     qDebug() << "end of setting results";
+    qint64 elapsed = timer.elapsed();
+    qDebug() << "qDebug() took" << elapsed << "ms";
 }
 
 QString SearchModel::enumToQString(FileType fileType)
 {
     QMetaEnum metaEnum = QMetaEnum::fromType<SearchModel::FileType>();
     return metaEnum.valueToKey(fileType);
+}
+
+QString SearchModel::getFileLastWriteTime(const QString& filePath) {
+    struct statx statxbuf;
+    // Use statx to retrieve file state; STATX_MTIME is used to obtain the last modification time.
+    if (statx(AT_FDCWD, filePath.toStdString().c_str(), AT_STATX_SYNC_AS_STAT, STATX_MTIME, &statxbuf) != 0) {
+        qCritical() << "Failed to get file last write time: " << filePath;
+        return "-";
+    }
+
+    time_t last_write_time = statxbuf.stx_mtime.tv_sec;
+    char time_string[std::size("yyyy-MM-dd HH:mm:ss")];
+    std::strftime(std::data(time_string), std::size(time_string), "%F %T", std::localtime(&last_write_time));
+    return time_string;
 }

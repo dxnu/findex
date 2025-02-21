@@ -76,6 +76,8 @@ private:
 
     QString enumToQString(FileType fileType);
 
+    QString getFileLastWriteTime(const QString& filePath);
+
 signals:
     void searchCompleted(int searchCount);
     void searchResultsReady(const QStringList& results);
