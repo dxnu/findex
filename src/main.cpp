@@ -14,18 +14,18 @@ int main(int argc, char *argv[])
     qDebug() << "Qt Version:" << QT_VERSION_STR;
     QGuiApplication app(argc, argv);
 
-    QQmlApplicationEngine engine;
-
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     for (const QString& locale : uiLanguages) {
-        const QString baseName = "findex_" + QLocale(locale).name();
-        if (translator.load(":/translations/" + baseName)) {
+        // const QString baseName = "findex_" + QLocale(locale).name();
+        if (translator.load(":/translations/findex_zh_CN"/* + baseName*/)) {
+            qDebug() << "load translator";
             app.installTranslator(&translator);
             break;
         }
     }
 
+    QQmlApplicationEngine engine;
     qmlRegisterType<SearchModel>("com.search.model", 1, 0, "SearchModel");
     SearchController* searchController = new SearchController(&engine);
     FileController* fileController = new FileController(&engine);

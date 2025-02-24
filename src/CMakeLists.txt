@@ -14,15 +14,20 @@ set(PROJECT_SOURCES
 )
 
 message(STATUS "SOURCES: ${PROJECT_SOURCES}")
+message(STATUS "CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
-    message(STATUS "Generated QM_FILES: ${QM_FILES}")
-    qt_add_executable(findex
-        ${PROJECT_SOURCES}
-        ${QM_FILES}
-    )
-    message(STATUS "Qt Version: Qt6")
+    # qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+    # message(STATUS "Generated QM_FILES: ${QM_FILES}")
+    # qt_add_executable(findex
+    #     ${PROJECT_SOURCES}
+    #     ${QM_FILES}
+    # )
+    # message(STATUS "Qt Version: Qt6")
+    qt_add_executable(findex ${PROJECT_SOURCES})
+    qt_add_lupdate(SOURCE_TARGETS findex TS_FILES ${TS_FILES} SOURCES ${RC_FILES})
+    qt_add_lrelease(TS_FILES ${TS_FILES} QM_FILES_OUTPUT_VARIABLE qm_files)
+    install(FILES ${qm_files} DESTINATION "translations")
 else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
     add_executable(findex

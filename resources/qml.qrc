@@ -12,9 +12,7 @@
         <file>qml/FindexLogView.qml</file>
         <file>qml/FindexMenuBar.qml</file>
         <file>qml/FindexSearchBar.qml</file>
-        <file>qml/FindexSettingMenu.qml</file>
         <file>qml/FindexTableView.qml</file>
-        <file>qml/FindexTitleBar.qml</file>
         <file>qml/main.qml</file>
     </qresource>
     <qresource prefix="/findex">

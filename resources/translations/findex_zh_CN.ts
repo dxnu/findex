@@ -2,82 +2,107 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>AboutWindow</name>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="8"/>
+        <source>findex</source>
+        <translation>径寻</translation>
+    </message>
+</context>
+<context>
     <name>FindexMenuBar</name>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="9"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>文件</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="11"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>新建</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="16"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="19"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>视图</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="22"/>
         <source>Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>网格</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="27"/>
         <source>Table</source>
-        <translation type="unfinished"></translation>
+        <translation>表格</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="33"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>帮助</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="36"/>
         <source>Cache Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>缓存目录</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="48"/>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>主题</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="50"/>
         <source>Dark</source>
-        <translation type="unfinished"></translation>
+        <translation>暗色</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="54"/>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>亮色</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="60"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>关于</translation>
     </message>
 </context>
 <context>
-    <name>FindexSearchBar</name>
+    <name>SearchModel</name>
     <message>
-        <location filename="../qml/FindexSearchBar.qml" line="17"/>
-        <source>输入文件名称，快速找你想要</source>
-        <translation type="unfinished"></translation>
+        <location filename="../../src/model/SearchModel.cpp" line="225"/>
+        <source>Name</source>
+        <translation>名称</translation>
     </message>
-</context>
-<context>
-    <name>FindexSettingMenu</name>
     <message>
-        <location filename="../qml/FindexSettingMenu.qml" line="86"/>
-        <source>About</source>
-        <translation type="unfinished"></translation>
+        <location filename="../../src/model/SearchModel.cpp" line="227"/>
+        <source>Path</source>
+        <translation>路径</translation>
+    </message>
+    <message>
+        <location filename="../../src/model/SearchModel.cpp" line="229"/>
+        <source>Last Modified</source>
+        <translation>修改时间</translation>
+    </message>
+    <message>
+        <location filename="../../src/model/SearchModel.cpp" line="231"/>
+        <source>Size</source>
+        <translation>大小</translation>
+    </message>
+    <message>
+        <location filename="../../src/model/SearchModel.cpp" line="233"/>
+        <source>Type</source>
+        <translation>类型</translation>
+    </message>
+    <message>
+        <location filename="../../src/model/SearchModel.cpp" line="235"/>
+        <source>Unknown</source>
+        <translation>未知</translation>
     </message>
 </context>
 <context>

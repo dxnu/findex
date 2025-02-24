@@ -1,5 +1,6 @@
 #include "SearchModel.h"
 
+#include <charconv>
 #include <filesystem>
 
 #include <sys/stat.h>  // For statx and struct statx
@@ -221,17 +222,17 @@ QVariant SearchModel::headerData(int section, Qt::Orientation orientation, int r
         switch (section)
         {
         case 0:
-            return "Name";
+            return tr("Name");
         case 1:
-            return "Path";
+            return tr("Path");
         case 2:
-            return "Last Modified";
+            return tr("Last Modified");
         case 3:
-            return "Size";
+            return tr("Size");
         case 4:
-            return "Type";
+            return tr("Type");
         default:
-            return "Unknown";
+            return tr("Unknown");
         }
     }
 
@@ -282,7 +283,7 @@ void SearchModel::handleResults(const QStringList& results)
 
         addFileRecord({ fileInfo.fileName(), fileInfo.path(), 
             getFileLastWriteTime(list[0])/*fileInfo.lastModified().toString("yyyy-MM-dd HH:mm:ss")*/,
-            list[2], list[1] });
+            getFileSize(list[0].toStdString()), list[1] });
     }
 
     emit searchCompleted(this->rowCount());
@@ -311,4 +312,28 @@ QString SearchModel::getFileLastWriteTime(const QString& filePath) {
     char time_string[std::size("yyyy-MM-dd HH:mm:ss")];
     std::strftime(std::data(time_string), std::size(time_string), "%F %T", std::localtime(&last_write_time));
     return time_string;
+}
+
+QString SearchModel::getFileSize(const std::filesystem::path& path) {
+    namespace fs = std::filesystem;
+    std::error_code ec;
+    if (auto regular = fs::is_regular_file(path, ec); !ec) {
+        if (auto size = fs::file_size(path, ec); !ec) {
+            const double thresholds[] = {1, 1024.0, 1024.0 * 1024.0, 1024.0 * 1024.0 * 1024.0, 1024.0 * 1024.0 * 1024.0 * 1024.0};
+            const char* units[] = { " bytes", " KB", " MB", " GB", " TB" };
+
+            const size_t buf_size = 10;
+            char buf[buf_size]{};
+            for (int i = sizeof(thresholds) / sizeof(double) - 1; i >= 0; --i) {
+                if (size >= thresholds[i]) {
+                    auto [ptr, ec] = std::to_chars(buf, buf + buf_size, size / thresholds[i], std::chars_format::fixed, 1);
+                    if (ec == std::errc{}) {
+                        return QString::fromStdString(std::string(buf, ptr - buf) + units[i]);
+                    }
+                }
+            }
+        }
+    }
+
+    return "-";
 }

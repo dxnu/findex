@@ -78,6 +78,8 @@ private:
 
     QString getFileLastWriteTime(const QString& filePath);
 
+    QString getFileSize(const std::filesystem::path& path);
+
 signals:
     void searchCompleted(int searchCount);
     void searchResultsReady(const QStringList& results);
