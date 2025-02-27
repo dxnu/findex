@@ -12,7 +12,8 @@ ApplicationWindow {
     minimumWidth: 1000
     minimumHeight: 600
     visible: true
-    title: qsTr("findex")
+    //% "findex"
+    title: qsTrId("findex")
     // flags: Qt.FramelessWindowHint
 
     property string currentTheme: "dark"

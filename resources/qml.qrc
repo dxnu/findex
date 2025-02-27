@@ -22,6 +22,7 @@
     </qresource>
     <qresource prefix="/translations">
         <file alias="findex_zh_CN.qm">../build/src/findex_zh_CN.qm</file>
+        <file alias="findex_fr_FR.qm">../build/src/findex_fr_FR.qm</file>
     </qresource>
     <qresource>
         <file>fonts/fa-solid-900.ttf</file>

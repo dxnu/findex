@@ -14,7 +14,6 @@
 SearchModel::SearchModel(QObject* parent)
     : QAbstractTableModel(parent), watcher_(nullptr)
 {
-    qDebug() << "SearchModel created:" << this;
     if (QDBusConnection::systemBus().isConnected()) {
         iface_ = std::make_unique<QDBusInterface>("com.deepin.anything",
                                                   "/com/deepin/anything",
@@ -22,11 +21,6 @@ SearchModel::SearchModel(QObject* parent)
                                                   QDBusConnection::systemBus());
         connect(iface_.get(), SIGNAL(asyncSearchCompleted(QStringList)), this, SLOT(handleAsyncSearchResults(QStringList)));
     }
-}
-
-SearchModel::~SearchModel()
-{
-    qDebug() << "SearchModel destroyed:" << this;
 }
 
 QString SearchModel::cacheDirectory() const
@@ -86,7 +80,7 @@ void SearchModel::search(const QString& path, const QString& keywords, int offse
     }
 }
 
-void SearchModel::search(const QString& keywords)
+void SearchModel::search(const QString& path, const QString& keywords)
 {
     qDebug() << "search: " << keywords;
 
@@ -115,8 +109,8 @@ void SearchModel::search(const QString& keywords)
 
     if (iface_->isValid()) {
         auto pendingCall = type == "type:"
-            ? iface_->asyncCall("search", trimmedKeywords)
-            : iface_->asyncCall("search", trimmedKeywords, type);
+            ? iface_->asyncCall("search", path, trimmedKeywords)
+            : iface_->asyncCall("search", path, trimmedKeywords, type);
         watcher_ = new QDBusPendingCallWatcher(pendingCall, this);
         connect(watcher_, &QDBusPendingCallWatcher::finished, this, &SearchModel::handleSearchResults);
     }

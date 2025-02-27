@@ -1,60 +1,49 @@
 #include "SearchController.h"
 
-#include <QDebug>
-
 SearchController::SearchController(QObject* parent)
-    : QObject(parent)
-{
-    qDebug() << "SearchModel created:" << this;
-    searchModel_ = new SearchModel(this);
-}
+    : QObject(parent), searchModel_(new SearchModel(this)) {}
 
-SearchController::~SearchController()
-{
-    qDebug() << "SearchController destroyed:" << this;
-}
-
-Q_INVOKABLE SearchModel *SearchController::model() const
+SearchModel* SearchController::model() const
 {
     return searchModel_;
 }
 
-Q_INVOKABLE void SearchController::search(const QString &path, const QString &keywords, int offset, int max_count)
+void SearchController::search(const QString& path, const QString& keywords, int offset, int max_count)
 {
     searchModel_->search(path, keywords, offset, max_count);
 }
 
-Q_INVOKABLE void SearchController::search(const QString &keywords)
+void SearchController::search(const QString& path, const QString& keywords)
 {
-    searchModel_->search(keywords);
+    searchModel_->search(path, keywords);
 }
 
-Q_INVOKABLE void SearchController::async_search(const QString &keywords)
+void SearchController::async_search(const QString& keywords)
 {
     searchModel_->async_search(keywords);
 }
 
-Q_INVOKABLE int SearchController::size() const
+int SearchController::size() const
 {
     return searchModel_->rowCount();
 }
 
-Q_INVOKABLE bool SearchController::empty() const
+bool SearchController::empty() const
 {
     return size() == 0;
 }
 
-Q_INVOKABLE QString SearchController::cacheDirectory() const
+QString SearchController::cacheDirectory() const
 {
     return searchModel_->cacheDirectory();
 }
 
-Q_INVOKABLE void SearchController::clear()
+void SearchController::clear()
 {
     searchModel_->clear();
 }
 
-Q_INVOKABLE void SearchController::indexFilesInDirectory(const QString& directoryPath) const
+void SearchController::indexFilesInDirectory(const QString& directoryPath) const
 {
     searchModel_->indexFilesInDirectory(directoryPath);
 }

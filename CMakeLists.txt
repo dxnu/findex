@@ -7,6 +7,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick DBus LinguistT
 
 set(TS_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/findex_zh_CN.ts
+    ${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/findex_fr_FR.ts
 )
 
 set(RC_FILES

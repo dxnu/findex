@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_CN">
+<TS version="2.1" language="fr_FR">
 <context>
     <name></name>
     <message id="findex">
         <location filename="../qml/AboutWindow.qml" line="9"/>
         <location filename="../qml/main.qml" line="16"/>
         <source>findex</source>
-        <translation>迹索</translation>
+        <translation>findex</translation>
     </message>
 </context>
 <context>
@@ -15,62 +15,62 @@
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="9"/>
         <source>File</source>
-        <translation>文件</translation>
+        <translation>Fichier</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="11"/>
         <source>New</source>
-        <translation>新建</translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="19"/>
         <source>Edit</source>
-        <translation>编辑</translation>
+        <translation>Éditer</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="22"/>
         <source>View</source>
-        <translation>视图</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="25"/>
         <source>Grid</source>
-        <translation>网格</translation>
+        <translation>Grille</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="30"/>
         <source>Table</source>
-        <translation>表格</translation>
+        <translation>Tableau</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="36"/>
         <source>Help</source>
-        <translation>帮助</translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="39"/>
         <source>Cache Directory</source>
-        <translation>缓存目录</translation>
+        <translation>Répertoire du cache</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="51"/>
         <source>Theme</source>
-        <translation>主题</translation>
+        <translation>Thème</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="53"/>
         <source>Dark</source>
-        <translation>暗色</translation>
+        <translation>Sombre</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="57"/>
         <source>Light</source>
-        <translation>亮色</translation>
+        <translation>Clair</translation>
     </message>
     <message>
         <location filename="../qml/FindexMenuBar.qml" line="63"/>
         <source>&amp;About</source>
-        <translation>关于</translation>
+        <translation>&amp;À propos</translation>
     </message>
 </context>
 <context>
@@ -78,32 +78,32 @@
     <message>
         <location filename="../../src/model/SearchModel.cpp" line="219"/>
         <source>Name</source>
-        <translation>名称</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location filename="../../src/model/SearchModel.cpp" line="221"/>
         <source>Path</source>
-        <translation>路径</translation>
+        <translation>Chemin</translation>
     </message>
     <message>
         <location filename="../../src/model/SearchModel.cpp" line="223"/>
         <source>Last Modified</source>
-        <translation>修改时间</translation>
+        <translation>Dernière modification</translation>
     </message>
     <message>
         <location filename="../../src/model/SearchModel.cpp" line="225"/>
         <source>Size</source>
-        <translation>大小</translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <location filename="../../src/model/SearchModel.cpp" line="227"/>
         <source>Type</source>
-        <translation>类型</translation>
+        <translation>Type</translation>
     </message>
     <message>
         <location filename="../../src/model/SearchModel.cpp" line="229"/>
         <source>Unknown</source>
-        <translation>未知</translation>
+        <translation>Inconnu</translation>
     </message>
 </context>
 </TS>

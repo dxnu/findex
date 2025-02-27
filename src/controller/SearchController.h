@@ -10,12 +10,11 @@ class SearchController : public QObject
     Q_OBJECT
 public:
     explicit SearchController(QObject* parent = nullptr);
-    ~SearchController();
 
     Q_INVOKABLE SearchModel* model() const;
 
     Q_INVOKABLE void search(const QString& path, const QString& keywords, int offset, int maxCount);
-    Q_INVOKABLE void search(const QString& keywords);
+    Q_INVOKABLE void search(const QString& path, const QString& keywords);
     Q_INVOKABLE void async_search(const QString& keywords);
 
     Q_INVOKABLE int size() const;

@@ -10,6 +10,9 @@ MenuBar {
         Action {
             text: qsTr("New")
             shortcut: "Ctrl+N"
+            onTriggered: {
+                languageController.switchLanguage("fr_FR")
+            }
         }
     }
 

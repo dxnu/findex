@@ -14,6 +14,7 @@ Rectangle {
         height: parent.height
         rightPadding: 40
         font.pixelSize: 14
+        focus: true
         placeholderText: focus || text.length > 0 ? null : "输入文件名称，快速找你想要"
         selectByMouse: true
 
@@ -36,7 +37,7 @@ Rectangle {
         onTextChanged: {
             if (text.length > 0) {
                 searchController.clear()
-                searchController.search(text)
+                searchController.search("", text)
             }
         }
     }

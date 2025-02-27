@@ -40,13 +40,12 @@ public:
     };
 
     explicit SearchModel(QObject* parent = nullptr);
-    ~SearchModel();
 
     QString cacheDirectory() const;
 
     void search(const QString& path, const QString& keywords, int offset, int maxCount);
 
-    void search(const QString& keywords);
+    void search(const QString& path, const QString& keywords);
     void async_search(const QString& keywords);
 
     void indexFilesInDirectory(const QString& directoryPath) const;

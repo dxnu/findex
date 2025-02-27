@@ -5,7 +5,8 @@ Window {
     width: 400
     height: 250
     visible: false
-    title: qsTr("findex")
+    //% "findex"
+    title: qsTrId("findex")
     // modality: Qt.ApplicationModal
     flags: Qt.Window /*| Qt.WindowMinimizeButtonHint*/ | Qt.WindowCloseButtonHint | Qt.WindowStaysOnTopHint
 }
